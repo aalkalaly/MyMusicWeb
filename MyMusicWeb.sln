@@ -5,7 +5,15 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMusicWeb", "MyMusicWeb\MyMusicWeb.csproj", "{49A8C42C-4BE1-4F8A-8778-E6A029549726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusicWebData", "MyMusicWebData\MyMusicWebData.csproj", "{9728C9BA-1EC4-4D82-B04F-209DC306FF18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMusicWebData", "MyMusicWebData\MyMusicWebData.csproj", "{9728C9BA-1EC4-4D82-B04F-209DC306FF18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusicWebDataModels", "MyMusicWebDataModels\MyMusicWebDataModels.csproj", "{6C069084-1C11-43B0-B9D6-087EB30AA2B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusicWebViewModels", "MyMusicWebViewModels\MyMusicWebViewModels.csproj", "{2AF046EA-83E5-4368-8734-9C3E34520059}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2975D262-1B99-4EA1-A960-DD870B0326E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{34553598-1A62-43F5-BF18-913D1AD1A423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +29,23 @@ Global
 		{9728C9BA-1EC4-4D82-B04F-209DC306FF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9728C9BA-1EC4-4D82-B04F-209DC306FF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9728C9BA-1EC4-4D82-B04F-209DC306FF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C069084-1C11-43B0-B9D6-087EB30AA2B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C069084-1C11-43B0-B9D6-087EB30AA2B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C069084-1C11-43B0-B9D6-087EB30AA2B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C069084-1C11-43B0-B9D6-087EB30AA2B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF046EA-83E5-4368-8734-9C3E34520059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF046EA-83E5-4368-8734-9C3E34520059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF046EA-83E5-4368-8734-9C3E34520059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF046EA-83E5-4368-8734-9C3E34520059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49A8C42C-4BE1-4F8A-8778-E6A029549726} = {34553598-1A62-43F5-BF18-913D1AD1A423}
+		{9728C9BA-1EC4-4D82-B04F-209DC306FF18} = {2975D262-1B99-4EA1-A960-DD870B0326E0}
+		{6C069084-1C11-43B0-B9D6-087EB30AA2B1} = {2975D262-1B99-4EA1-A960-DD870B0326E0}
+		{2AF046EA-83E5-4368-8734-9C3E34520059} = {34553598-1A62-43F5-BF18-913D1AD1A423}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93A704EC-6207-4A41-9769-1A1FC13F606E}
