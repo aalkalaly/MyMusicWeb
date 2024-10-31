@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyMusicWeb.Data
+namespace MyMusicWebData
 {
     public class ApplicationDbContext : IdentityDbContext
     {
