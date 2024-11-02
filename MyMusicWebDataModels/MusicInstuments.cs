@@ -1,12 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace MyMusicWebDataModels
 {
@@ -37,11 +34,12 @@ namespace MyMusicWebDataModels
         [StringLength(500)]
         [Comment("The Music Instrument's Description")]
         public string Description { get; set; }
-        //[Required]
-        //[Comment("The Id of the Publisher")]
-        //public string PublisherId { get; set; } = null!;
-        //[ForeignKey(nameof(PublisherId))]
-        //public IdentityUser Publisher { get; set; } = null!;
-
+        [Required]
+        public string SellerId { get; set; }
+        [ForeignKey(nameof(SellerId))]
+        public IdentityUser Seller { get; set; }
+        [Required]
+        [Comment("Is the Instrument Deleted")]
+        public bool IsDeleted { get; set; } = false;
     }
 }
