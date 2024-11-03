@@ -23,7 +23,7 @@ namespace MyMusicWebData
         {
 
             base.OnModelCreating(modelBuilder);
-            
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         }
     }

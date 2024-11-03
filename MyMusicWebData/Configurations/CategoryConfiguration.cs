@@ -13,7 +13,22 @@ namespace MyMusicWebData.Configurations
     {
         void IEntityTypeConfiguration<Category>.Configure(EntityTypeBuilder<Category> builder)
         {
-           
+            builder.HasData(SeedData());
+        }
+        public List<Category> SeedData()
+        {
+            List<Category> categories = new List<Category>()
+            {
+                new Category()
+                {
+                    Name = "drums"
+                },
+                new Category()
+                {
+                    Name = "guitars"
+                }
+            };
+            return categories;
         }
     }
 }

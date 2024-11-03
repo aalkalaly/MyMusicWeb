@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyMusicWebDataModels;
 
 namespace MyMusicWebViewModels
 {
@@ -20,15 +21,12 @@ namespace MyMusicWebViewModels
 
         public Guid CategoryId { get; set; }
 
-        //public Category Category { get; set; }
 
         public string Description { get; set; }
-        //[Required]
-        //[Comment("The Id of the Publisher")]
-        //public string PublisherId { get; set; } = null!;
-        //[ForeignKey(nameof(PublisherId))]
-        //public IdentityUser Publisher { get; set; } = null!;
-
+        [Required]
+       
+        public string PublisherId { get; set; } = null!;
+        
         public bool IsDeleted { get; set; } = false;
     }
 }
