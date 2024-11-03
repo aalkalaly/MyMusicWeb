@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
@@ -21,12 +22,8 @@ namespace MyMusicWebViewModels
 
         public Guid CategoryId { get; set; }
 
+        public IdentityUser Seller { get; set; } = null!;
+        public bool HasBought { get; set; }
 
-        public string Description { get; set; }
-        [Required]
-       
-        public string PublisherId { get; set; } = null!;
-        
-        public bool IsDeleted { get; set; } = false;
     }
 }

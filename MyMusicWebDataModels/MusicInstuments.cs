@@ -41,5 +41,8 @@ namespace MyMusicWebDataModels
         [Required]
         [Comment("Is the Instrument Deleted")]
         public bool IsDeleted { get; set; } = false;
+        public ICollection<MusicInstrumentsBuyers> MusicInstrumentsBuyers { get; set; } = new List<MusicInstrumentsBuyers>();
+       
+
     }
 }
