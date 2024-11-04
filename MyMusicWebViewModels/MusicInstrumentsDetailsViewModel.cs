@@ -9,7 +9,7 @@ namespace MyMusicWebViewModels
 {
     public class MusicInstrumentsDetailsViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3)]
         public string Name { get; set; }

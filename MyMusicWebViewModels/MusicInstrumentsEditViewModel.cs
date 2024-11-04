@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MyMusicWebDataModels;
+﻿using MyMusicWebDataModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyMusicWebViewModels
 {
-    public class MusicInstrumentsAddViewModel
+    public class MusicInstrumentsEditViewModel
     {
         public Guid Id { get; set; }
         [Required]
@@ -24,13 +23,11 @@ namespace MyMusicWebViewModels
 
         public Guid CategoryId { get; set; }
 
-        public List<Category>? Categories { get; set; } 
+        public List<CategoriesViewModel>? Categories { get; set; }
         [Required]
         [StringLength(500, MinimumLength = 3)]
         public string Description { get; set; }
 
         public string? SellerId { get; set; } = null!;
-
-
     }
 }
