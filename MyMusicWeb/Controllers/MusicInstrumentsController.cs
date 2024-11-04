@@ -16,6 +16,7 @@ namespace MyMusicWeb.Controllers
         {
             this.dbContext = dbContext;
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             string currentUserId = GetUserId();
@@ -215,36 +216,36 @@ namespace MyMusicWeb.Controllers
             await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        //[HttpGet]
-        //public async Task<IActionResult> Delete(Guid id)
-        //{
-        //    var model = await context.Products
-        //       .Where(p => p.Id == id)
-        //       .AsNoTracking()
-        //       .Select(p => new ProductDeleteViewModels()
-        //       {
-        //           ProductName = p.ProductName,
-        //           Seller = p.Seller.UserName,
-        //           SellerId = p.SellerId,
-        //           Id = p.Id
-        //       })
-        //       .FirstOrDefaultAsync();
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(ProductDeleteViewModels model)
-        //{
-        //    Product? product = await context.Products
-        //        .Where(p => p.Id == model.Id)
-        //        .Where(p => p.IsDeleted == false)
-        //        .FirstOrDefaultAsync();
-        //    if (product != null)
-        //    {
-        //        product.IsDeleted = true;
-        //        await context.SaveChangesAsync();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var model = await dbContext.MusicInstuments
+               .Where(p => p.Id == id)
+               .AsNoTracking()
+               .Select(p => new MusicInstrumentsDeleteViewModels()
+               {
+                   Name = p.Name,
+                   Seller = p.Seller.UserName,
+                   SellerId = p.SellerId,
+                   Id = p.Id
+               })
+               .FirstOrDefaultAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(MusicInstrumentsDeleteViewModels model)
+        {
+            MusicInstuments? instrument = await dbContext.MusicInstuments
+                .Where(p => p.Id == model.Id)
+                .Where(p => p.IsDeleted == false)
+                .FirstOrDefaultAsync();
+            if (instrument != null)
+            {
+                instrument.IsDeleted = true;
+                await dbContext.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
         private string? GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
