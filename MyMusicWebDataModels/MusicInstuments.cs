@@ -1,4 +1,4 @@
-﻿
+﻿using static MyMusicWeb.Common.MusicInstrumentsConstants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -17,10 +17,11 @@ namespace MyMusicWebDataModels
         [Comment("The Music Instrument's Id")]
         public Guid Id { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(MusicInstrumentNameMaxLength)]
         [Comment("The Music Instrument's Name")]
         public string Name { get; set; }
         [Required]
+        [Range(typeof(decimal), PriceMinRange, PriceMaxRange)]
         [Comment("The Music Instrument's Price")]
         public decimal Price { get; set; }
         [Comment("The Music Instrument's Image")]
@@ -31,7 +32,7 @@ namespace MyMusicWebDataModels
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
         [Required]
-        [StringLength(500)]
+        [StringLength(DescriptionMaxLength)]
         [Comment("The Music Instrument's Description")]
         public string Description { get; set; }
         [Required]

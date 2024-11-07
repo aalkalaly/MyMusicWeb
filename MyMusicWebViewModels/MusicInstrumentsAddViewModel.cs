@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MyMusicWeb.Common.MusicInstrumentsConstants;
+
 
 namespace MyMusicWebViewModels
 {
@@ -13,10 +15,10 @@ namespace MyMusicWebViewModels
     {
         public Guid Id { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 3)]
+        [StringLength(MusicInstrumentNameMaxLength , MinimumLength = MusicInstrumentNameMinLength)]
         public string Name { get; set; }
         [Required]
-        [Range(1, 10000)]
+        [Range(typeof(decimal), PriceMinRange, PriceMaxRange)]
 
         public decimal Price { get; set; }
 
@@ -26,7 +28,7 @@ namespace MyMusicWebViewModels
 
         public List<Category>? Categories { get; set; } 
         [Required]
-        [StringLength(500, MinimumLength = 3)]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLrngth)]
         public string Description { get; set; }
 
         public string? SellerId { get; set; } = null!;

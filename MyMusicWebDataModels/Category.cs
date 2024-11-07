@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MyMusicWeb.Common.CategoryConstants;
 
 namespace MyMusicWebDataModels
 {
@@ -18,7 +19,7 @@ namespace MyMusicWebDataModels
         [Comment("Categorie's Id")]
         public Guid Id { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(CategoryNameMaxLength)]
         [Comment("Categorie's Name")]
         public string Name { get; set; }
 

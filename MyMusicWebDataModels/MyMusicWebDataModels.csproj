@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyMusicWeb.Common\MyMusicWeb.Common.csproj" />
+  </ItemGroup>
+
 </Project>

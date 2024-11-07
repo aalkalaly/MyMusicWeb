@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyMusicWeb.Common\MyMusicWeb.Common.csproj" />
+    <ProjectReference Include="..\MyMusicWeb.Infrastructure\MyMusicWeb.Infrastructure.csproj" />
     <ProjectReference Include="..\MyMusicWebDataModels\MyMusicWebDataModels.csproj" />
     <ProjectReference Include="..\MyMusicWebData\MyMusicWebData.csproj" />
     <ProjectReference Include="..\MyMusicWebViewModels\MyMusicWebViewModels.csproj" />

@@ -239,7 +239,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -266,7 +266,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("MusicInstrumentsBuyers");
+                    b.ToTable("MusicInstrumentsBuyers", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.MusicInstuments", b =>
@@ -314,7 +314,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("MusicInstuments");
+                    b.ToTable("MusicInstuments", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
