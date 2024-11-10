@@ -126,15 +126,7 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(MusicInstrumentsDeleteViewModels model)
         {
-            MusicInstruments? instrument = await dbContext.MusicInstruments
-                .Where(p => p.Id == model.Id)
-                .Where(p => p.IsDeleted == false)
-                .FirstOrDefaultAsync();
-            if (instrument != null)
-            {
-                instrument.IsDeleted = true;
-                await dbContext.SaveChangesAsync();
-            }
+            await this.musicInstrumentsService.DeleteFromMusicInstruments(model);
             return RedirectToAction("Index");
         }
         private string? GetUserId()

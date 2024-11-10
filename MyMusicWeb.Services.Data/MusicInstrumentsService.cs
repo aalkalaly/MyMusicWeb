@@ -34,9 +34,17 @@ namespace MyMusicWeb.Services.Data
             await musicInstrumentRepository.AddAsync(newInstrument);
         }
 
-        public Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model)
+        public async Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model)
         {
-            throw new NotImplementedException();
+            MusicInstruments? instrument = await musicInstrumentRepository.GetAllAtached()
+                .Where(p => p.Id == model.Id)
+                .Where(p => p.IsDeleted == false)
+                .FirstOrDefaultAsync();
+            if (instrument != null)
+            {
+                instrument.IsDeleted = true;
+                await musicInstrumentRepository.DeleteAsync(instrument.Id);
+            }
         }
 
         public async Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, MusicInstruments entity)
