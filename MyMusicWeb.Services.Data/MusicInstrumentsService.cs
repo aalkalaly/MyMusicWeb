@@ -20,9 +20,18 @@ namespace MyMusicWeb.Services.Data
             this.musicInstrumentRepository = musicInstrumentRepository;
         }
 
-        public Task AddMusicInstrumentsAsync(MusicInstrumentsAddViewModel model)
+        public async Task AddMusicInstrumentsAsync(MusicInstrumentsAddViewModel model)
         {
-            throw new NotImplementedException();
+            var newInstrument = new MusicInstruments
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                CategoryId = model.CategoryId,
+                SellerId = model.SellerId
+            };
+            await musicInstrumentRepository.AddAsync(newInstrument);
         }
 
         public Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model)

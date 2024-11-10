@@ -37,6 +37,7 @@ namespace MyMusicWeb.Controllers
             model.Categories = await dbContext.Categories
                 .AsNoTracking()
                 .ToListAsync();
+            
 
             return View(model);
         }
@@ -50,17 +51,8 @@ namespace MyMusicWeb.Controllers
                 .ToListAsync();
                 return View(model);
             }
-            var newInstrument = new MusicInstruments
-            {
-                Name = model.Name,
-                Price = model.Price,
-                Description = model.Description,
-                ImageUrl = model.ImageUrl,
-                CategoryId = model.CategoryId,
-                SellerId = GetUserId()
-            };
-            await dbContext.MusicInstruments.AddAsync(newInstrument);
-            await dbContext.SaveChangesAsync();
+            model.SellerId = GetUserId();
+            await this.musicInstrumentsService.AddMusicInstrumentsAsync(model);
             return RedirectToAction("Index");
         }
        
