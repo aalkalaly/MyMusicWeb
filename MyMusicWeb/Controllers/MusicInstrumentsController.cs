@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyMusicWebData;
+using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 using System.Globalization;
@@ -11,16 +12,18 @@ namespace MyMusicWeb.Controllers
     public class MusicInstrumentsController : Controller
     {
         private readonly ApplicationDbContext dbContext;
+        private IRepository<MusicInstruments, Guid> movieRepository;
 
-        public MusicInstrumentsController(ApplicationDbContext dbContext)
+        public MusicInstrumentsController(ApplicationDbContext dbContext, IRepository<MusicInstruments, Guid> movieRepository)
         {
             this.dbContext = dbContext;
+            this.movieRepository = movieRepository;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             string currentUserId = GetUserId();
-            var model = await dbContext.MusicInstuments
+            var model = await dbContext.MusicInstruments
                 .Where(p => p.IsDeleted == false)
                 .Select(p => new MusicalInstrumentsIndexViewModel()
                 {
@@ -57,7 +60,7 @@ namespace MyMusicWeb.Controllers
                 .ToListAsync();
                 return View(model);
             }
-            var newInstrument = new MusicInstuments
+            var newInstrument = new MusicInstruments
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -66,7 +69,7 @@ namespace MyMusicWeb.Controllers
                 CategoryId = model.CategoryId,
                 SellerId = GetUserId()
             };
-            await dbContext.MusicInstuments.AddAsync(newInstrument);
+            await dbContext.MusicInstruments.AddAsync(newInstrument);
             await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -75,7 +78,7 @@ namespace MyMusicWeb.Controllers
         {
             string currentUserId = GetUserId();
 
-            var model = await dbContext.MusicInstuments
+            var model = await dbContext.MusicInstruments
                 .Where(p => p.IsDeleted == false)
                 .Where(g => g.MusicInstrumentsBuyers.Any(cl => cl.BuyerId == currentUserId))
                 .Select(p => new MusicalInstrumentsIndexViewModel()
@@ -95,7 +98,7 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(Guid id)
         {
-            MusicInstuments? entity = await dbContext.MusicInstuments
+            MusicInstruments? entity = await dbContext.MusicInstruments
                 .Where(p => p.Id == id)
                 .Include(p => p.MusicInstrumentsBuyers)
                 .FirstOrDefaultAsync();
@@ -119,7 +122,7 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromCart(Guid id)
         {
-            MusicInstuments? entity = await dbContext.MusicInstuments
+            MusicInstruments? entity = await dbContext.MusicInstruments
                 .Where(p => p.Id == id)
                 .Include(p => p.MusicInstrumentsBuyers)
                 .FirstOrDefaultAsync();
@@ -141,7 +144,7 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var model = await dbContext.MusicInstuments
+            var model = await dbContext.MusicInstruments
                 .Where(p => p.Id == id)
                 .AsNoTracking()
                 .Select(p => new MusicInstrumentsDetailsViewModel()
@@ -169,7 +172,7 @@ namespace MyMusicWeb.Controllers
                     Name = c.Name
                 })
                 .ToListAsync();
-            var model = await dbContext.MusicInstuments
+            var model = await dbContext.MusicInstruments
                 .Where(p => p.Id == id)
                 .Select(p => new MusicInstrumentsEditViewModel()
                 {
@@ -199,7 +202,7 @@ namespace MyMusicWeb.Controllers
             }
 
          
-            MusicInstuments entity = await dbContext.MusicInstuments.FindAsync(id);
+            MusicInstruments entity = await dbContext.MusicInstruments.FindAsync(id);
             if (entity == null)
             {
                 throw new ArgumentException();
@@ -219,7 +222,7 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var model = await dbContext.MusicInstuments
+            var model = await dbContext.MusicInstruments
                .Where(p => p.Id == id)
                .AsNoTracking()
                .Select(p => new MusicInstrumentsDeleteViewModels()
@@ -235,7 +238,7 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(MusicInstrumentsDeleteViewModels model)
         {
-            MusicInstuments? instrument = await dbContext.MusicInstuments
+            MusicInstruments? instrument = await dbContext.MusicInstruments
                 .Where(p => p.Id == model.Id)
                 .Where(p => p.IsDeleted == false)
                 .FirstOrDefaultAsync();

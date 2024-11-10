@@ -14,7 +14,7 @@ namespace MyMusicWebDataModels
     {
         public Guid MusicInstrumentId { get; set; }
         [ForeignKey(nameof(MusicInstrumentId))]
-        public MusicInstuments MusicInstuments { get; set; }
+        public MusicInstruments MusicInstruments { get; set; }
         public string BuyerId { get; set; }
         [ForeignKey(nameof(BuyerId))]
         public IdentityUser Buyer { get; set; }

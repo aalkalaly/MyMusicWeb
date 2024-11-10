@@ -12,7 +12,7 @@ namespace MyMusicWebData.Migrations
         {
             migrationBuilder.AddColumn<bool>(
                 name: "IsDeleted",
-                table: "MusicInstuments",
+                table: "MusicInstruments",
                 type: "bit",
                 nullable: false,
                 defaultValue: false,
@@ -24,7 +24,7 @@ namespace MyMusicWebData.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "IsDeleted",
-                table: "MusicInstuments");
+                table: "MusicInstruments");
         }
     }
 }

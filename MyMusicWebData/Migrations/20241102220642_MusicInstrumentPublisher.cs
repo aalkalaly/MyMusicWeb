@@ -12,19 +12,19 @@ namespace MyMusicWebData.Migrations
         {
             migrationBuilder.AddColumn<string>(
                 name: "SellerId",
-                table: "MusicInstuments",
+                table: "MusicInstruments",
                 type: "nvarchar(450)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MusicInstuments_SellerId",
-                table: "MusicInstuments",
+                name: "IX_MusicInstruments_SellerId",
+                table: "MusicInstruments",
                 column: "SellerId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_MusicInstuments_AspNetUsers_SellerId",
-                table: "MusicInstuments",
+                name: "FK_MusicInstruments_AspNetUsers_SellerId",
+                table: "MusicInstruments",
                 column: "SellerId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
@@ -35,16 +35,16 @@ namespace MyMusicWebData.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_MusicInstuments_AspNetUsers_SellerId",
-                table: "MusicInstuments");
+                name: "FK_MusicInstruments_AspNetUsers_SellerId",
+                table: "MusicInstruments");
 
             migrationBuilder.DropIndex(
-                name: "IX_MusicInstuments_SellerId",
-                table: "MusicInstuments");
+                name: "IX_MusicInstruments_SellerId",
+                table: "MusicInstruments");
 
             migrationBuilder.DropColumn(
                 name: "SellerId",
-                table: "MusicInstuments");
+                table: "MusicInstruments");
         }
     }
 }

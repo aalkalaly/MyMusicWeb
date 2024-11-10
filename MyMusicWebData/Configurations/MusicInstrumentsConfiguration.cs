@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MyMusicWebData.Configurations
 {
-    public class MusicInstrumentsConfiguration : IEntityTypeConfiguration<MusicInstuments>
+    public class MusicInstrumentsConfiguration : IEntityTypeConfiguration<MusicInstruments>
     {
-        void IEntityTypeConfiguration<MusicInstuments>.Configure(EntityTypeBuilder<MusicInstuments> builder)
+        void IEntityTypeConfiguration<MusicInstruments>.Configure(EntityTypeBuilder<MusicInstruments> builder)
         {
             
         }

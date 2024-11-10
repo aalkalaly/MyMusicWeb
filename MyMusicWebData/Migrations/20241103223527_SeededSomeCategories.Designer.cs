@@ -272,7 +272,7 @@ namespace MyMusicWebData.Migrations
                     b.ToTable("MusicInstrumentsBuyers");
                 });
 
-            modelBuilder.Entity("MyMusicWebDataModels.MusicInstuments", b =>
+            modelBuilder.Entity("MyMusicWebDataModels.MusicInstruments", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -317,7 +317,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("MusicInstuments");
+                    b.ToTable("MusicInstruments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -379,7 +379,7 @@ namespace MyMusicWebData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyMusicWebDataModels.MusicInstuments", "MusicInstuments")
+                    b.HasOne("MyMusicWebDataModels.MusicInstruments", "MusicInstruments")
                         .WithMany()
                         .HasForeignKey("MusicInstrumentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -387,13 +387,13 @@ namespace MyMusicWebData.Migrations
 
                     b.Navigation("Buyer");
 
-                    b.Navigation("MusicInstuments");
+                    b.Navigation("MusicInstruments");
                 });
 
-            modelBuilder.Entity("MyMusicWebDataModels.MusicInstuments", b =>
+            modelBuilder.Entity("MyMusicWebDataModels.MusicInstruments", b =>
                 {
                     b.HasOne("MyMusicWebDataModels.Category", "Category")
-                        .WithMany("MusicInstuments")
+                        .WithMany("MusicInstruments")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -411,7 +411,7 @@ namespace MyMusicWebData.Migrations
 
             modelBuilder.Entity("MyMusicWebDataModels.Category", b =>
                 {
-                    b.Navigation("MusicInstuments");
+                    b.Navigation("MusicInstruments");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MyMusicWebData.Repository
 {
-    public class Repository<TType, TId> : IRepository<TType, TId>
+    public class BaseRepository<TType, TId> : IRepository<TType, TId>
         where TType : class
     {
         private readonly ApplicationDbContext dbContext;
         private readonly DbSet<TType> dbSet;
-        public Repository(ApplicationDbContext dbContext)
+        public BaseRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
             this.dbSet = this.dbContext.Set<TType>();

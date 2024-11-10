@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMusicWebDataModels
 {
-    public class MusicInstuments
+    public class MusicInstruments
     {
-        public MusicInstuments()
+        public MusicInstruments()
         {
             this.Id = Guid.NewGuid();
         }

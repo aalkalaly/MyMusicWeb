@@ -23,7 +23,7 @@ namespace MyMusicWebDataModels
         [Comment("Categorie's Name")]
         public string Name { get; set; }
 
-        public ICollection<MusicInstuments> MusicInstuments { get; set; } = new List<MusicInstuments>();
+        public ICollection<MusicInstruments> MusicInstruments { get; set; } = new List<MusicInstruments>();
 
     }
 }

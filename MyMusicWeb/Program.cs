@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyMusicWeb.Infrastructure;
 using MyMusicWeb.Services.Mapping;
 using MyMusicWebData;
+using MyMusicWebData.Repository.Interfaces;
+using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 
 
@@ -21,6 +24,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireUppercase = false;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    //.AddRoles<IdentityRole<Guid>>()
+    //.AddSignInManager<SignInManager<ApplicationUser>>()
+    //.AddUserManager<UserManager<ApplicationUser>>();
+builder.Services.ConfigureApplicationCookie(cfg =>
+{
+    cfg.LoginPath = "/Identity/Account/Login";
+});
+
+builder.Services.RegisterRepostitories(typeof(ApplicationUser).Assembly);
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllersWithViews();

@@ -245,7 +245,7 @@ namespace MyMusicWebData.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("MyMusicWebDataModels.MusicInstuments", b =>
+            modelBuilder.Entity("MyMusicWebDataModels.MusicInstruments", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +284,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("MusicInstuments");
+                    b.ToTable("MusicInstruments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -338,7 +338,7 @@ namespace MyMusicWebData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyMusicWebDataModels.MusicInstuments", b =>
+            modelBuilder.Entity("MyMusicWebDataModels.MusicInstruments", b =>
                 {
                     b.HasOne("MyMusicWebDataModels.Category", "Category")
                         .WithMany()

@@ -28,9 +28,9 @@ namespace MyMusicWebData.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_MusicInstrumentsBuyers_MusicInstuments_MusicInstrumentId",
+                        name: "FK_MusicInstrumentsBuyers_MusicInstruments_MusicInstrumentId",
                         column: x => x.MusicInstrumentId,
-                        principalTable: "MusicInstuments",
+                        principalTable: "MusicInstruments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });

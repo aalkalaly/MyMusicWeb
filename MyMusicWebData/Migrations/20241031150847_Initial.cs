@@ -169,7 +169,7 @@ namespace MyMusicWebData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MusicInstuments",
+                name: "MusicInstruments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, comment: "The Music Instrument's Id"),
@@ -181,9 +181,9 @@ namespace MyMusicWebData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MusicInstuments", x => x.Id);
+                    table.PrimaryKey("PK_MusicInstruments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MusicInstuments_Categories_CategoryId",
+                        name: "FK_MusicInstruments_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -230,8 +230,8 @@ namespace MyMusicWebData.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MusicInstuments_CategoryId",
-                table: "MusicInstuments",
+                name: "IX_MusicInstruments_CategoryId",
+                table: "MusicInstruments",
                 column: "CategoryId");
         }
 
@@ -254,7 +254,7 @@ namespace MyMusicWebData.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "MusicInstuments");
+                name: "MusicInstruments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
