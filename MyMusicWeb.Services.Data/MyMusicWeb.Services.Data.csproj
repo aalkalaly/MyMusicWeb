@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyMusicWebDataModels\MyMusicWebDataModels.csproj" />
+    <ProjectReference Include="..\MyMusicWebData\MyMusicWebData.csproj" />
+    <ProjectReference Include="..\MyMusicWebViewModels\MyMusicWebViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
