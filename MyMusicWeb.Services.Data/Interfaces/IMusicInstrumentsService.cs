@@ -1,4 +1,5 @@
-﻿using MyMusicWebViewModels;
+﻿using MyMusicWebDataModels;
+using MyMusicWebViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MyMusicWeb.Services.Data.Interfaces
         Task<IEnumerable<MusicalInstrumentsIndexViewModel>> IndexGetAllNotDeletedAsync(string id);
         Task AddMusicInstrumentsAsync(MusicInstrumentsAddViewModel model);
         Task<MusicInstrumentsDetailsViewModel> MusicInstrumentsDetailsById(Guid id);
-        Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, Guid id);
+        Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, MusicInstruments entity);
         Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model);
 
     }

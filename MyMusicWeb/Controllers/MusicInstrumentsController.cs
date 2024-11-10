@@ -59,22 +59,7 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var model = await dbContext.MusicInstruments
-                .Where(p => p.Id == id)
-                .AsNoTracking()
-                .Select(p => new MusicInstrumentsDetailsViewModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Description = p.Description,
-                    ImageUrl = p.ImageUrl,
-                    CategoryName = p.Category.Name,
-                    Seller = p.Seller.UserName,
-                    HasBought = p.MusicInstrumentsBuyers.Any(p => p.MusicInstrumentId == id)
-
-                })
-                .FirstOrDefaultAsync();
+            MusicInstrumentsDetailsViewModel model = await musicInstrumentsService.MusicInstrumentsDetailsById(id);
             return View(model);
         }
         [HttpGet]
@@ -96,7 +81,8 @@ namespace MyMusicWeb.Controllers
                     Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     CategoryId = p.CategoryId,
-                    Categories = categories
+                    Categories = categories,
+                    SellerId = p.SellerId
                 })
                 .FirstOrDefaultAsync();
             return View(model);
@@ -115,23 +101,10 @@ namespace MyMusicWeb.Controllers
                 .ToListAsync();
                 return View(model);
             }
-
-         
             MusicInstruments entity = await dbContext.MusicInstruments.FindAsync(id);
-            if (entity == null)
-            {
-                throw new ArgumentException();
-            }
 
-            entity.Name = model.Name;
-            entity.Price = model.Price;
-            entity.Description = model.Description;
-            entity.ImageUrl = model.ImageUrl;
-            entity.CategoryId = model.CategoryId;
-            entity.SellerId = GetUserId();
+            await this.musicInstrumentsService.EditMusicInstrumentsById(model, entity);
 
-
-            await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]

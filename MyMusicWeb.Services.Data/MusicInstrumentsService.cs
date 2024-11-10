@@ -39,9 +39,24 @@ namespace MyMusicWeb.Services.Data
             throw new NotImplementedException();
         }
 
-        public Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, Guid id)
+        public async Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, MusicInstruments entity)
         {
-            throw new NotImplementedException();
+           
+            if (entity == null)
+            {
+                throw new ArgumentException();
+            }
+
+            entity.Name = model.Name;
+            entity.Price = model.Price;
+            entity.Description = model.Description;
+            entity.ImageUrl = model.ImageUrl;
+            entity.CategoryId = model.CategoryId;
+            entity.SellerId = model.SellerId;
+
+
+            await musicInstrumentRepository.UpdateAsync(entity);
+            
         }
 
         public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> IndexGetAllNotDeletedAsync(string currentUserId)
@@ -64,9 +79,26 @@ namespace MyMusicWeb.Services.Data
             return model;
         }
 
-        public Task<MusicInstrumentsDetailsViewModel> MusicInstrumentsDetailsById(Guid id)
+        public async Task<MusicInstrumentsDetailsViewModel> MusicInstrumentsDetailsById(Guid id)
         {
-            throw new NotImplementedException();
+            var model = await musicInstrumentRepository
+                .GetAllAtached()
+                .Where(p => p.Id == id)
+                .AsNoTracking()
+                .Select(p => new MusicInstrumentsDetailsViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    CategoryName = p.Category.Name,
+                    Seller = p.Seller.UserName,
+                    HasBought = p.MusicInstrumentsBuyers.Any(p => p.MusicInstrumentId == id)
+
+                })
+                .FirstOrDefaultAsync();
+            return model;
         }
 
     }
