@@ -12,7 +12,7 @@ namespace MyMusicWebData.Repository.Interfaces
         Task<TType> GetByIdAsync(TId id);
         IEnumerable<TType> GetAll();
         Task<IEnumerable<TType>> GetAllAsync();
-        IEnumerable<TType> GetAllAtached();
+        IQueryable<TType> GetAllAtached();
         void Add(TType item);
         Task AddAsync(TType item);
         bool Delete(TId id);

@@ -11,12 +11,12 @@ namespace MyMusicWeb.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        private IRepository<MusicInstruments, Guid> movieRepository;
+        private IRepository<MusicInstruments, Guid> cartRepository;
 
-        public CartController(ApplicationDbContext dbContext, IRepository<MusicInstruments, Guid> movieRepository)
+        public CartController(ApplicationDbContext dbContext, IRepository<MusicInstruments, Guid> cartRepository)
         {
             this.dbContext = dbContext;
-            this.movieRepository = movieRepository;
+            this.cartRepository = cartRepository;
         }
         [HttpGet]
         public async Task<IActionResult> Cart()

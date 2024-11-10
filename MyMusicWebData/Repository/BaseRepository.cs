@@ -64,7 +64,7 @@ namespace MyMusicWebData.Repository
         {
             return await this.dbSet.ToArrayAsync();
         }
-        public IEnumerable<TType> GetAllAtached()
+        public IQueryable<TType> GetAllAtached()
         {
             return this.dbSet.AsQueryable();
         }

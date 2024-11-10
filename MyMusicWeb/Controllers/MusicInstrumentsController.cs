@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
@@ -12,31 +13,20 @@ namespace MyMusicWeb.Controllers
     public class MusicInstrumentsController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        private IRepository<MusicInstruments, Guid> movieRepository;
+        
+        private readonly IMusicInstrumentsService musicInstrumentsService;
 
-        public MusicInstrumentsController(ApplicationDbContext dbContext, IRepository<MusicInstruments, Guid> movieRepository)
+        public MusicInstrumentsController(ApplicationDbContext dbContext, IMusicInstrumentsService musicInstrumentsService)
         {
             this.dbContext = dbContext;
-            this.movieRepository = movieRepository;
+            this.musicInstrumentsService = musicInstrumentsService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             string currentUserId = GetUserId();
-            var model = await dbContext.MusicInstruments
-                .Where(p => p.IsDeleted == false)
-                .Select(p => new MusicalInstrumentsIndexViewModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    ImageUrl = p.ImageUrl,
-                    Price = p.Price,
-                    Seller = p.Seller,
-                    HasBought = p.MusicInstrumentsBuyers.Any(p => p.BuyerId == currentUserId)
-                })
-                .AsNoTracking()
-                .ToListAsync();
-
+            IEnumerable<MusicalInstrumentsIndexViewModel> model =
+               await this.musicInstrumentsService.IndexGetAllNotDeletedAsync(currentUserId);
 
             return View(model);
         }

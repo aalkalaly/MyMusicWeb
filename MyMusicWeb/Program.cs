@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Infrastructure;
+using MyMusicWeb.Services.Data;
+using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWeb.Services.Mapping;
 using MyMusicWebData;
-using MyMusicWebData.Repository.Interfaces;
+
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 
@@ -33,6 +35,7 @@ builder.Services.ConfigureApplicationCookie(cfg =>
 });
 
 builder.Services.RegisterRepostitories(typeof(ApplicationUser).Assembly);
+builder.Services.AddScoped<IMusicInstrumentsService, MusicInstrumentsService>();
 
 builder.Services.AddControllersWithViews();
 
