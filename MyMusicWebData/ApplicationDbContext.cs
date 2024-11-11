@@ -19,6 +19,9 @@ namespace MyMusicWebData
         public  DbSet<MusicInstruments> MusicInstruments { get; set; }
         public  DbSet<Category> Categories { get; set; }
         public DbSet<MusicInstrumentsBuyers> MusicInstrumentsBuyers { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Genra > Genras { get; set; }
+        public DbSet<Location > Locations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

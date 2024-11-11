@@ -10,7 +10,7 @@ namespace MyMusicWeb.Services.Data.Interfaces
     public interface ICartService
     {
         Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedAsync(string id);
-        Task RemoveFromCartById();
+        Task RemoveFromCartById(Guid id, string currentUserId);
         Task AddToCartById(Guid id, string currentUserId);
     }
 }

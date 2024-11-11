@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,8 @@ namespace MyMusicWebData.Repository.Interfaces
         Task<TType> GetByIdAsync(TId id);
         IEnumerable<TType> GetAll();
         Task<IEnumerable<TType>> GetAllAsync();
+        TType FirstOrDefault(Func<TType, bool> predicate);
+        Task<TType> FirstOrDefaultAsync(Expression<Func<TType, bool>> predicate);
         IQueryable<TType> GetAllAtached();
         void Add(TType item);
         Task AddAsync(TType item);

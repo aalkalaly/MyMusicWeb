@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMusicWebData;
 
@@ -11,9 +12,11 @@ using MyMusicWebData;
 namespace MyMusicWebData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241111211708_EventLocationGenra")]
+    partial class EventLocationGenra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,12 +247,12 @@ namespace MyMusicWebData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8e42e2d9-7f08-4a28-8412-f6696a621ea6"),
+                            Id = new Guid("135f3c20-d84f-4e05-af53-0452a6d8a55c"),
                             Name = "drums"
                         },
                         new
                         {
-                            Id = new Guid("47487c8a-317c-4534-85f1-e8df9c1741c9"),
+                            Id = new Guid("1f6bebe7-171a-4232-85f3-552e9d0e3afb"),
                             Name = "guitars"
                         });
                 });
@@ -274,10 +277,6 @@ namespace MyMusicWebData.Migrations
                     b.Property<Guid>("GenraId")
                         .HasColumnType("uniqueidentifier")
                         .HasComment("The event's genra");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("A photo of the event");
 
                     b.Property<bool>("IsActual")
                         .HasColumnType("bit")
@@ -317,7 +316,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genras");
+                    b.ToTable("Genra");
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Location", b =>
@@ -335,7 +334,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.MusicInstruments", b =>

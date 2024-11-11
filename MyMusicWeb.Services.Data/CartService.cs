@@ -22,9 +22,12 @@ namespace MyMusicWeb.Services.Data
         }
         public async Task AddToCartById(Guid id, string currentUserId)
         {
-            
-            MusicInstruments? entity = musicInstruments.GetById(id);
-                    if (entity == null)
+
+            MusicInstruments? entity =  musicInstruments.GetAllAtached()
+                 .Where(p => p.Id == id)
+                 .Include(p => p.MusicInstrumentsBuyers)
+                 .FirstOrDefault();
+            if (entity == null)
                     {
                         throw new ArgumentException();
                     }
@@ -32,12 +35,14 @@ namespace MyMusicWeb.Services.Data
             {
                 throw new ArgumentException();
             }
-            MusicInstrumentsBuyers newmm = new MusicInstrumentsBuyers()
+            
+            entity.MusicInstrumentsBuyers.Add(new MusicInstrumentsBuyers()
             {
                 BuyerId = currentUserId,
-                MusicInstrumentId = entity.Id
-            };
-            await musicInstrumentBuyers.AddAsync(newmm);
+                MusicInstrumentId = entity.Id,
+            });
+            
+            await musicInstruments.UpdateAsync(entity);
         }
 
         public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedAsync(string id)
@@ -59,9 +64,19 @@ namespace MyMusicWeb.Services.Data
             return model;
         }
 
-        public Task RemoveFromCartById()
+        public async Task RemoveFromCartById(Guid id, string currentUserId)
         {
-            throw new NotImplementedException();
+            //MusicInstruments? entity = await musicInstruments.GetByIdAsync(id);
+            //        if (entity == null)
+            //        {
+            //            throw new ArgumentException();
+            //        }
+            //MusicInstrumentsBuyers? productClient = await musicInstrumentBuyers.FirstOrDefaultAsync(um => um.MusicInstrumentId == id && um.BuyerId == currentUserId);
+            //if (productClient != null)
+            //{
+            //    await musicInstrumentBuyers.DeleteAsync(productClient);
+          
+            //}
         }
     }
 }

@@ -57,6 +57,7 @@ namespace MyMusicWeb.Controllers
                 await dbContext.SaveChangesAsync();
             }
 
+            // await this.cartService.RemoveFromCartById(id, currentUserId);
 
             return RedirectToAction("Cart");
         }
