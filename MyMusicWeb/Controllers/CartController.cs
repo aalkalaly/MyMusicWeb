@@ -5,37 +5,26 @@ using MyMusicWebDataModels;
 using Microsoft.EntityFrameworkCore;
 using MyMusicWebViewModels;
 using System.Security.Claims;
-
+using MyMusicWeb.Services.Data.Interfaces;
 namespace MyMusicWeb.Controllers
 {
     public class CartController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        private IRepository<MusicInstruments, Guid> cartRepository;
+        private readonly ICartService cartService;
 
-        public CartController(ApplicationDbContext dbContext, IRepository<MusicInstruments, Guid> cartRepository)
+        public CartController(ApplicationDbContext dbContext, ICartService cartService)
         {
             this.dbContext = dbContext;
-            this.cartRepository = cartRepository;
+            this.cartService = cartService;
         }
         [HttpGet]
         public async Task<IActionResult> Cart()
         {
             string currentUserId = GetUserId();
 
-            var model = await dbContext.MusicInstruments
-                .Where(p => p.IsDeleted == false)
-                .Where(g => g.MusicInstrumentsBuyers.Any(cl => cl.BuyerId == currentUserId))
-                .Select(p => new MusicalInstrumentsIndexViewModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    ImageUrl = p.ImageUrl,
-                    Price = p.Price,
-                    Seller = p.Seller,
-                })
-                .AsNoTracking()
-                .ToListAsync();
+            IEnumerable<MusicalInstrumentsIndexViewModel> model =
+                await this.cartService.CartGetAllNotDeletedAsync(currentUserId);
 
 
             return View(model);
