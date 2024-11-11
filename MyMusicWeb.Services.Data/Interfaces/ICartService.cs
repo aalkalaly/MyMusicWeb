@@ -11,6 +11,6 @@ namespace MyMusicWeb.Services.Data.Interfaces
     {
         Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedAsync(string id);
         Task RemoveFromCartById();
-        Task AddToCartById();
+        Task AddToCartById(Guid id, string currentUserId);
     }
 }

@@ -20,9 +20,24 @@ namespace MyMusicWeb.Services.Data
             this.musicInstrumentBuyers = musicInstrumentBuyers;
             this.musicInstruments = musicInstruments;
         }
-        public Task AddToCartById()
+        public async Task AddToCartById(Guid id, string currentUserId)
         {
-            throw new NotImplementedException();
+            
+            MusicInstruments? entity = musicInstruments.GetById(id);
+                    if (entity == null)
+                    {
+                        throw new ArgumentException();
+                    }
+            if (entity.MusicInstrumentsBuyers.Any(pc => pc.BuyerId == currentUserId))
+            {
+                throw new ArgumentException();
+            }
+            MusicInstrumentsBuyers newmm = new MusicInstrumentsBuyers()
+            {
+                BuyerId = currentUserId,
+                MusicInstrumentId = entity.Id
+            };
+            await musicInstrumentBuyers.AddAsync(newmm);
         }
 
         public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedAsync(string id)

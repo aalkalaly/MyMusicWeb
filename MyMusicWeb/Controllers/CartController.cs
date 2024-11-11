@@ -32,25 +32,10 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(Guid id)
         {
-            MusicInstruments? entity = await dbContext.MusicInstruments
-                .Where(p => p.Id == id)
-                .Include(p => p.MusicInstrumentsBuyers)
-                .FirstOrDefaultAsync();
-            if (entity == null)
-            {
-                throw new ArgumentException();
-            }
+           
             string currentUserId = GetUserId();
-            if (entity.MusicInstrumentsBuyers.Any(pc => pc.BuyerId == currentUserId))
-            {
-                return RedirectToAction("Cart");
-            }
-            entity.MusicInstrumentsBuyers.Add(new MusicInstrumentsBuyers()
-            {
-                BuyerId = currentUserId,
-                MusicInstrumentId = entity.Id
-            });
-            await dbContext.SaveChangesAsync();
+            await this.cartService.AddToCartById(id, currentUserId);
+
             return RedirectToAction("Cart");
         }
         [HttpPost]
