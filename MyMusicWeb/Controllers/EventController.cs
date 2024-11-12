@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData;
 using MyMusicWebViewModels;
@@ -17,19 +18,23 @@ namespace MyMusicWeb.Controllers
             this.dbContext = dbContext;
            
         }
-        public async IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             string currentUserId = GetUserId();
             var model = await dbContext.Events
                 .Where(p => p.IsActual != false)
-                .Select(p => new() EventIndexViewModel()
+                .Select(p => new EventIndexViewModel()
                 {
-
+                    Id = p.Id,
+                    Name = p.Name,
+                    Date = p.Date,
+                    ImageUrl = p.ImageUrl,
+                    IsActual = p.IsActual
                 })
-
-                // .AsNoTracking()
-                //.ToListAsync();
-            return View();
+                .AsNoTracking()
+                .ToListAsync();
+     
+            return View(model);
         }
         private string? GetUserId()
         {

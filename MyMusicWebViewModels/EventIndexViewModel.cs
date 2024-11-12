@@ -15,7 +15,6 @@ namespace MyMusicWebViewModels
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public string? ImageUrl { get; set; }
-        public string LocationName { get; set; }
         public bool IsActual { get; set; } = true;
     }
 }
