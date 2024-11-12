@@ -22,6 +22,10 @@ namespace MyMusicWeb.Controllers
         public async Task<IActionResult> Cart()
         {
             string currentUserId = GetUserId();
+            if ( string.IsNullOrWhiteSpace (currentUserId))
+            {
+                return RedirectToPage("/Identity/Account/Login");
+            }
 
             IEnumerable<MusicalInstrumentsIndexViewModel> model =
                 await this.cartService.CartGetAllNotDeletedAsync(currentUserId);
@@ -41,23 +45,9 @@ namespace MyMusicWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromCart(Guid id)
         {
-            MusicInstruments? entity = await dbContext.MusicInstruments
-                .Where(p => p.Id == id)
-                .Include(p => p.MusicInstrumentsBuyers)
-                .FirstOrDefaultAsync();
-            if (entity == null)
-            {
-                throw new ArgumentException();
-            }
+            
             string currentUserId = GetUserId();
-            MusicInstrumentsBuyers? productClient = entity.MusicInstrumentsBuyers.FirstOrDefault(pc => pc.BuyerId == currentUserId);
-            if (productClient != null)
-            {
-                entity.MusicInstrumentsBuyers.Remove(productClient);
-                await dbContext.SaveChangesAsync();
-            }
-
-            // await this.cartService.RemoveFromCartById(id, currentUserId);
+            await this.cartService.RemoveFromCartById(id, currentUserId);
 
             return RedirectToAction("Cart");
         }

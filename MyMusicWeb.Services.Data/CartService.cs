@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MyMusicWeb.Services.Data
 {
-    public class CartService : ICartService
+    public class CartService : BaseService, ICartService
     {
         private readonly IRepository<MusicInstrumentsBuyers, object> musicInstrumentBuyers;
         private readonly IRepository<MusicInstruments, Guid> musicInstruments;
@@ -66,17 +66,22 @@ namespace MyMusicWeb.Services.Data
 
         public async Task RemoveFromCartById(Guid id, string currentUserId)
         {
-            //MusicInstruments? entity = await musicInstruments.GetByIdAsync(id);
-            //        if (entity == null)
-            //        {
-            //            throw new ArgumentException();
-            //        }
-            //MusicInstrumentsBuyers? productClient = await musicInstrumentBuyers.FirstOrDefaultAsync(um => um.MusicInstrumentId == id && um.BuyerId == currentUserId);
-            //if (productClient != null)
-            //{
-            //    await musicInstrumentBuyers.DeleteAsync(productClient);
-          
-            //}
+            
+            MusicInstruments? entity = await musicInstruments.GetAllAtached()
+                .Where(p => p.Id == id)
+                .Include(p => p.MusicInstrumentsBuyers)
+                .FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new ArgumentException();
+            }
+            
+            MusicInstrumentsBuyers? productClient = entity.MusicInstrumentsBuyers.FirstOrDefault(pc => pc.BuyerId == currentUserId);
+            if (productClient != null)
+            {
+                entity.MusicInstrumentsBuyers.Remove(productClient);
+                await musicInstruments.UpdateAsync(entity);
+            }
         }
     }
 }
