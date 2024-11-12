@@ -13,6 +13,7 @@ namespace MyMusicWebViewModels
 {
     public class MusicInstrumentsAddViewModel
     {
+        [Required]
         public Guid Id { get; set; }
         [Required]
         [StringLength(MusicInstrumentNameMaxLength , MinimumLength = MusicInstrumentNameMinLength)]
@@ -23,6 +24,7 @@ namespace MyMusicWebViewModels
         public decimal Price { get; set; }
 
         public string? ImageUrl { get; set; }
+        [Required]
 
         public Guid CategoryId { get; set; }
 

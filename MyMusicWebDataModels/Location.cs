@@ -19,9 +19,13 @@ namespace MyMusicWebDataModels
         [Comment("The location's id")]
         public Guid Id { get; set; }
         [Required]
-        [StringLength(LocationMaxLength)]
-        [Comment("The location's name")]
+        [StringLength(LocationAdressMaxLength)]
+        [Comment("The location's adress")]
         public string Adress { get; set; }
+        [Required]
+        [StringLength(LocationNameMaxLength)]
+        [Comment("The location's name")]
+        public string Name { get; set; }
         public ICollection<Event> Events { get; set; } = new List<Event>();
     }
 }

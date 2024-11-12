@@ -16,8 +16,10 @@ namespace MyMusicWeb.Common
         public const int GenraNameMaxLength = 50;
         public const int GenraNameMinLength = 2;
         //Location
-        public const int LocationMaxLength = 200;
-        public const int LocationMinLength = 5;
+        public const int LocationAdressMaxLength = 500;
+        public const int LocationAdressMinLength = 5;
+        public const int LocationNameMaxLength = 100;
+        public const int LocationNameMinLength = 2;
 
     }
 }
