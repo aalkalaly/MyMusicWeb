@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData;
+using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 using System.Security.Claims;
 
@@ -18,56 +19,48 @@ namespace MyMusicWeb.Controllers
             this.eventService = eventService;
         }
 
-
-        public EventController(ApplicationDbContext dbContext)
-        {
-            this.dbContext = dbContext;
-           
-        }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             string currentUserId = GetUserId();
-            var model = await dbContext.Events
-                .Where(p => p.IsActual != false)
-                .Select(p => new EventIndexViewModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Date = p.Date,
-                    ImageUrl = p.ImageUrl,
-                    IsActual = p.IsActual
-                })
-                .AsNoTracking()
-                .ToListAsync();
-     
+            IEnumerable<EventIndexViewModel> model =
+                await this.eventService.IndexGetAllActualEventsAsync(currentUserId);
+
             return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var model = new MusicInstrumentsAddViewModel();
-            model.Categories = await dbContext.Categories
+            var model = new EventAddViewModel();
+            model.Genras = await dbContext.Genra
                 .AsNoTracking()
                 .ToListAsync();
-
+            model.Locations = await dbContext.Location
+                .AsNoTracking()
+                .ToListAsync();
 
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(MusicInstrumentsAddViewModel model)
+        public async Task<IActionResult> Add(EventAddViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    model.Categories = await dbContext.Categories
-            //    .AsNoTracking()
-            //    .ToListAsync();
-            //    return View(model);
-            //}
-            //model.SellerId = GetUserId();
-            //await this.eventService.AddMusicInstrumentsAsync(model);
+            if (!ModelState.IsValid)
+            {
+                model.Locations = await dbContext.Location
+                .AsNoTracking()
+                .ToListAsync();
+                model.Genras = await dbContext.Genra
+                .AsNoTracking()
+                .ToListAsync();
+                return View(model);
+            }
+
+            
+            await this.eventService.AddMusicInstrumentsAsync(model);
+
             return RedirectToAction("Index");
         }
+
         private string? GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);

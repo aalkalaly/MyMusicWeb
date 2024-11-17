@@ -12,6 +12,7 @@ namespace MyMusicWeb.Common
         public const int EventLengthMinLength = 5;
         public const int EventDescriptionMaxLength = 500;
         public const int EventDescriptionMinLength = 5;
+        public const string DateFormat = "dd-MM-yyyy";
         //Genra
         public const int GenraNameMaxLength = 50;
         public const int GenraNameMinLength = 2;

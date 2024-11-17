@@ -37,6 +37,7 @@ builder.Services.ConfigureApplicationCookie(cfg =>
 builder.Services.RegisterRepostitories(typeof(ApplicationUser).Assembly);
 builder.Services.AddScoped<IMusicInstrumentsService, MusicInstrumentsService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 builder.Services.AddControllersWithViews();
 
