@@ -3,6 +3,7 @@ using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
+using MyMusicWebViewModels.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,28 @@ namespace MyMusicWeb.Services.Data
                 Date = model.Date
             };
             await eventRepository.AddAsync(newEvent);
+        }
+
+        public async Task<EventDetailsViewModel> EventsDetailsById(Guid id)
+        {
+            var model = await eventRepository
+                .GetAllAtached()
+                .Where(p => p.Id == id)
+                .AsNoTracking()
+                .Select(p => new EventDetailsViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Date = p.Date,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    LocationName = p.Location.Name,
+                    LocationAdress = p.Location.Adress,
+                    GenraName = p.Genra.Name,
+                    IsActual = p.IsActual
+                })
+                .FirstOrDefaultAsync();
+            return model;
         }
 
         public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string id)

@@ -5,6 +5,7 @@ using MyMusicWebData;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
+using MyMusicWebViewModels.Category;
 using System.Globalization;
 using System.Security.Claims;
 

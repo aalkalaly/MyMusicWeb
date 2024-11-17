@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMusicWebViewModels
+namespace MyMusicWebViewModels.Event
 {
     public class EventIndexViewModel
     {

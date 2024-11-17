@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyMusicWeb.Services.Data;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
+using MyMusicWebViewModels.Event;
 using System.Security.Claims;
 
 namespace MyMusicWeb.Controllers
@@ -59,6 +61,12 @@ namespace MyMusicWeb.Controllers
             await this.eventService.AddMusicInstrumentsAsync(model);
 
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            EventDetailsViewModel model = await eventService.EventsDetailsById(id);
+            return View(model);
         }
 
         private string? GetUserId()

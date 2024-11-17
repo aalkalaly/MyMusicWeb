@@ -1,5 +1,5 @@
 ﻿using MyMusicWebDataModels;
-using MyMusicWebViewModels;
+using MyMusicWebViewModels.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace MyMusicWeb.Services.Data.Interfaces
     {
         Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string id);
         Task AddMusicInstrumentsAsync(EventAddViewModel model);
-        //Task<MusicInstrumentsDetailsViewModel> MusicInstrumentsDetailsById(Guid id);
+        Task<EventDetailsViewModel> EventsDetailsById(Guid id);
         //Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, MusicInstruments entity);
         //Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model);
     }

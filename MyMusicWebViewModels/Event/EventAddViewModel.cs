@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace MyMusicWebViewModels
+namespace MyMusicWebViewModels.Event
 {
     public class EventAddViewModel
     {
