@@ -3,6 +3,7 @@ using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
+using MyMusicWebViewModels.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,19 @@ namespace MyMusicWeb.Services.Data
     {
         private readonly IRepository<MusicInstrumentsBuyers, object> musicInstrumentBuyers;
         private readonly IRepository<MusicInstruments, Guid> musicInstruments;
+        private readonly IRepository<Event, Guid> eventsRepository;
         public CartService(IRepository<MusicInstrumentsBuyers, object> musicInstrumentBuyers, IRepository<MusicInstruments, Guid> musicInstruments)
         {
             this.musicInstrumentBuyers = musicInstrumentBuyers;
             this.musicInstruments = musicInstruments;
         }
-        public async Task AddToCartById(Guid id, string currentUserId)
+
+        public Task AddEventsToCartById(Guid id, string currentUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task AddInstrumentsToCartById(Guid id, string currentUserId)
         {
 
             MusicInstruments? entity =  musicInstruments.GetAllAtached()
@@ -45,7 +53,26 @@ namespace MyMusicWeb.Services.Data
             await musicInstruments.UpdateAsync(entity);
         }
 
-        public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedAsync(string id)
+        public async Task<IEnumerable<EventIndexViewModel>> CartGetAllNotDeletedEventsAsync(string id)
+        {
+            throw new NotImplementedException();
+            //var model = await eventsRepository.GetAllAtached()
+            // .Where(p => p.IsActual == true)
+            // .Where(g => g.MusicInstrumentsBuyers.Any(cl => cl.BuyerId == id))
+            // .Select(p => new MusicalInstrumentsIndexViewModel()
+            // {
+            //     Id = p.Id,
+            //     Name = p.Name,
+            //     ImageUrl = p.ImageUrl,
+            //     Price = p.Price,
+            //     Seller = p.Seller,
+            // })
+            // .AsNoTracking()
+            // .ToListAsync();
+            //return model;
+        }
+
+        public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedInstrumentsAsync(string id)
         {
 
                   var model = await musicInstruments.GetAllAtached()
@@ -64,7 +91,12 @@ namespace MyMusicWeb.Services.Data
             return model;
         }
 
-        public async Task RemoveFromCartById(Guid id, string currentUserId)
+        public Task RemoveEventsFromCartById(Guid id, string currentUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RemoveInstrumentsFromCartById(Guid id, string currentUserId)
         {
             
             MusicInstruments? entity = await musicInstruments.GetAllAtached()
