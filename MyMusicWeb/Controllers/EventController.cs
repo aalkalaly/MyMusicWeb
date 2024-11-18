@@ -5,7 +5,10 @@ using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
+using MyMusicWebViewModels.Category;
 using MyMusicWebViewModels.Event;
+using MyMusicWebViewModels.Genra;
+using MyMusicWebViewModels.Locations;
 using System.Security.Claims;
 
 namespace MyMusicWeb.Controllers
@@ -68,7 +71,87 @@ namespace MyMusicWeb.Controllers
             EventDetailsViewModel model = await eventService.EventsDetailsById(id);
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var genras = await dbContext.Genra
+                .Select(c => new GenraViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+            var locations = await dbContext.Location
+                .Select(c => new LocationViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Adress = c.Adress
+                })
+                .ToListAsync();
+            var model = await dbContext.Events
+                .Where(p => p.Id == id)
+                .Select(p => new EventEditViewModel()
+                {
+                    Name = p.Name,
+                    Date = p.Date,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    GenraId = p.GenraId,
+                    Genras = genras,
+                    LocationId = p.LocationId,
+                    Locations = locations
+                })
+                .FirstOrDefaultAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(EventEditViewModel model, Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Genras = await dbContext.Genra
+                .Select(c => new GenraViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToListAsync();
+                model.Locations = await dbContext.Location
+               .Select(c => new LocationViewModel
+               {
+                   Id = c.Id,
+                   Name = c.Name,
+                   Adress = c.Adress
+               })
+               .ToListAsync();
+                return View(model);
+            }
+            Event entity = await dbContext.Events.FindAsync(id);
 
+            await this.eventService.EditEventsById(model, entity);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var model = await dbContext.Events
+               .Where(p => p.Id == id)
+               .AsNoTracking()
+               .Select(p => new EventDeleteViewModel()
+               {
+                   Name = p.Name,
+                   Id = p.Id
+               })
+               .FirstOrDefaultAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(EventDeleteViewModel model)
+        {
+            await this.eventService.DeleteFromEventsById(model);
+            return RedirectToAction("Index");
+        }
         private string? GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);

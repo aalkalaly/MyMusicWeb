@@ -34,6 +34,37 @@ namespace MyMusicWeb.Services.Data
             await eventRepository.AddAsync(newEvent);
         }
 
+        public async Task DeleteFromEventsById(EventDeleteViewModel model)
+        {
+            Event? events = await eventRepository.GetAllAtached()
+                     .Where(p => p.Id == model.Id)
+                     .Where(p => p.IsActual == true)
+                     .FirstOrDefaultAsync();
+            if (events != null)
+            {
+                events.IsActual = false;
+                await eventRepository.DeleteAsync(events.Id);
+            }
+        }
+
+        public async Task EditEventsById(EventEditViewModel model, Event entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentException();
+            }
+
+            entity.Name = model.Name;
+            entity.Date = model.Date;
+            entity.Description = model.Description;
+            entity.ImageUrl = model.ImageUrl;
+            entity.LocationId = model.LocationId;
+            entity.GenraId = model.GenraId;
+
+
+            await eventRepository.UpdateAsync(entity);
+        }
+
         public async Task<EventDetailsViewModel> EventsDetailsById(Guid id)
         {
             var model = await eventRepository

@@ -37,7 +37,7 @@
                 <a asp-controller="MusicInstruments" asp-action="Index" class="btn btn-warning d-flex justify-content-center align-items-center flex-fill mx-1">Back</a>
                 @if (User?.Identity?.IsAuthenticated == true && User?.Identity?.Name != Model.Seller && !Model.HasBought)
                 {
-                    <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex justify-content-center align-items-center flex-fill mx-1">
+                    <form asp-controller="Cart" asp-action="AddInstrumentToCart" method="post" class="d-flex justify-content-center align-items-center flex-fill mx-1">
                             <input type="hidden" name="id" value="@Model.Id" />
                             <button type="submit" class="btn btn-success w-100">Buy</button>
                         </form>

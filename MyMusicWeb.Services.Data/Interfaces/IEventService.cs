@@ -13,7 +13,7 @@ namespace MyMusicWeb.Services.Data.Interfaces
         Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string id);
         Task AddMusicInstrumentsAsync(EventAddViewModel model);
         Task<EventDetailsViewModel> EventsDetailsById(Guid id);
-        //Task EditMusicInstrumentsById(MusicInstrumentsEditViewModel model, MusicInstruments entity);
-        //Task DeleteFromMusicInstruments(MusicInstrumentsDeleteViewModels model);
+        Task EditEventsById(EventEditViewModel model, Event entity);
+        Task DeleteFromEventsById(EventDeleteViewModel model);
     }
 }

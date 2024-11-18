@@ -9,7 +9,7 @@ namespace MyMusicWeb.Common
     public class EventConstants
     {
         public const int EventNameMaxLength = 50;
-        public const int EventLengthMinLength = 5;
+        public const int EventNameMinLength = 5;
         public const int EventDescriptionMaxLength = 500;
         public const int EventDescriptionMinLength = 5;
         public const string DateFormat = "dd-MM-yyyy";

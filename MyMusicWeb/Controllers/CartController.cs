@@ -19,7 +19,7 @@ namespace MyMusicWeb.Controllers
             this.cartService = cartService;
         }
         [HttpGet]
-        public async Task<IActionResult> Cart()
+        public async Task<IActionResult> CartForInstruments()
         {
             string currentUserId = GetUserId();
             if ( string.IsNullOrWhiteSpace (currentUserId))
@@ -34,7 +34,7 @@ namespace MyMusicWeb.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> AddToCart(Guid id)
+        public async Task<IActionResult> AddInstrumentToCart(Guid id)
         {
            
             string currentUserId = GetUserId();
@@ -43,7 +43,7 @@ namespace MyMusicWeb.Controllers
             return RedirectToAction("Cart");
         }
         [HttpPost]
-        public async Task<IActionResult> RemoveFromCart(Guid id)
+        public async Task<IActionResult> RemoveInstrumentFromCart(Guid id)
         {
             
             string currentUserId = GetUserId();
