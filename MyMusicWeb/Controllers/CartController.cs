@@ -41,7 +41,7 @@ namespace MyMusicWeb.Controllers
             string currentUserId = GetUserId();
             await this.cartService.AddInstrumentsToCartById(id, currentUserId);
 
-            return RedirectToAction("Cart");
+            return RedirectToAction("CartForInstruments");
         }
         [HttpPost]
         public async Task<IActionResult> RemoveInstrumentFromCart(Guid id)
@@ -50,7 +50,7 @@ namespace MyMusicWeb.Controllers
             string currentUserId = GetUserId();
             await this.cartService.RemoveInstrumentsFromCartById(id, currentUserId);
 
-            return RedirectToAction("Cart");
+            return RedirectToAction("CartForInstruments");
         }
         [HttpGet]
         public async Task<IActionResult> CartForEvents()
