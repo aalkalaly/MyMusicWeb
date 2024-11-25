@@ -43,7 +43,7 @@ namespace MyMusicWeb.Services.Data
             if (events != null)
             {
                 events.IsActual = false;
-                await eventRepository.DeleteAsync(events.Id);
+                //await eventRepository.DeleteAsync(events.Id);
             }
         }
 
