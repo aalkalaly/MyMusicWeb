@@ -40,6 +40,9 @@ namespace MyMusicWebDataModels
         [Required]
         [Comment("Is the event still ongoing")]
         public bool IsActual { get; set; } = true;
+        //[Required]
+        // 
+        //public int AvailableTickets {get; set;} = 0;
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }
