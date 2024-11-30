@@ -7,8 +7,10 @@ using MyMusicWebViewModels;
 using System.Security.Claims;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebViewModels.Event;
+using Microsoft.AspNetCore.Authorization;
 namespace MyMusicWeb.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext dbContext;
