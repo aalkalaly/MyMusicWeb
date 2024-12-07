@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMusicWebData;
 
@@ -11,9 +12,11 @@ using MyMusicWebData;
 namespace MyMusicWebData.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241207153647_Organisation")]
+    partial class Organisation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,12 +300,12 @@ namespace MyMusicWebData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("90d8ae6e-c4b4-4998-839a-1e992eb54119"),
+                            Id = new Guid("44ad4e7a-abe5-484a-bcdd-43e406bd627b"),
                             Name = "drums"
                         },
                         new
                         {
-                            Id = new Guid("38e55ec0-f1b8-4b75-9094-79cf3c00126c"),
+                            Id = new Guid("6c818b2d-50d9-41d7-98a3-c83fa6447c48"),
                             Name = "guitars"
                         });
                 });
@@ -383,22 +386,22 @@ namespace MyMusicWebData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f34256eb-2452-497d-84d7-7c715967a01a"),
+                            Id = new Guid("35139ee0-faf9-4bef-8348-fa234767f700"),
                             Name = "jazz"
                         },
                         new
                         {
-                            Id = new Guid("1975029b-e2d9-4a4f-88fb-056ce16f8dee"),
+                            Id = new Guid("64b6d60c-bb16-4e05-9366-aeee776d923d"),
                             Name = "rock"
                         },
                         new
                         {
-                            Id = new Guid("ab1ac228-015b-4a3e-8498-1b8a3606ad54"),
+                            Id = new Guid("3074654c-eef5-4148-b2ad-4007e1adc7f2"),
                             Name = "metal"
                         },
                         new
                         {
-                            Id = new Guid("fe5d16a2-7678-4baa-98ac-5e31f8b66651"),
+                            Id = new Guid("88c464ba-1f68-4eeb-b0e6-ca04e74e0873"),
                             Name = "rap"
                         });
                 });
@@ -429,19 +432,19 @@ namespace MyMusicWebData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a3e0a34e-a29d-43d3-bbcb-61f736767507"),
+                            Id = new Guid("0f3bf280-5c8f-4534-bf80-1ba60fd029e6"),
                             Adress = "ж.к. Студентски град, ул. „Акад. Стефан Младенов“ 3, 1700 София",
                             Name = "Joy Station"
                         },
                         new
                         {
-                            Id = new Guid("f6861e85-81b2-405f-93d2-84a3d1f07134"),
+                            Id = new Guid("449cda97-7d92-42e1-905e-c757dae122b4"),
                             Adress = "Парк, Борисова Градина, бул. „Евлоги и Христо Георгиеви“ 38, 1164 София",
                             Name = "Vasil Levski Stadium"
                         },
                         new
                         {
-                            Id = new Guid("86cb8016-f186-4274-a9e1-62e14b511cd0"),
+                            Id = new Guid("8f7c0d37-05b8-4bda-bb5a-5b643653ea4e"),
                             Adress = " Ндк, бул. България, 1463 София",
                             Name = "NDK"
                         });
@@ -566,7 +569,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organisations");
+                    b.ToTable("Organisation");
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Ticket", b =>

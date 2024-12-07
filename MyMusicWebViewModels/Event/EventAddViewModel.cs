@@ -30,6 +30,8 @@ namespace MyMusicWebViewModels.Event
         [Required(ErrorMessage = "No Date Provided")]
         [RegexStringValidator(@"^\d{2}-\d{2}-\d{4}$")]
         public DateTime Date { get; set; }
+    
+        public string? OrganisationId { get; set; }
 
     }
 }

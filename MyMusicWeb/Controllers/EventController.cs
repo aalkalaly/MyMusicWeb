@@ -27,11 +27,17 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            string currentUserId = GetUserId();
-            IEnumerable<EventIndexViewModel> model =
-                await this.eventService.IndexGetAllActualEventsAsync(currentUserId);
+            Organisation currentUser = dbContext.Organisations.FirstOrDefault(o => o.Id.ToString() == GetUserId());
+            if (currentUser != null)
+            {
+                IEnumerable<EventIndexViewModel> model =
+                await this.eventService.IndexGetAllActualEventsAsync(currentUser);
+                return View(model);
+            }
 
-            return View(model);
+            return RedirectToAction("Index", "HomeController");
+
+            
         }
         [HttpGet]
         public async Task<IActionResult> Add()
@@ -51,6 +57,7 @@ namespace MyMusicWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.OrganisationId = GetUserId();
                 model.Locations = await dbContext.Location
                 .AsNoTracking()
                 .ToListAsync();
@@ -61,15 +68,21 @@ namespace MyMusicWeb.Controllers
             }
 
             
-            await this.eventService.AddMusicInstrumentsAsync(model);
+            await this.eventService.AddEventsAsync(model);
 
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            EventDetailsViewModel model = await eventService.EventsDetailsById(id);
-            return View(model);
+            Organisation organisation = dbContext.Organisations.FirstOrDefault(x => x.Id.ToString() == GetUserId());
+            if (organisation != null)
+            {
+                EventDetailsViewModel model = await eventService.EventsDetailsById(id, organisation);
+                return View(model);
+            }
+            return RedirectToAction("Idex");
+            
         }
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -109,6 +122,7 @@ namespace MyMusicWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.OrganisationId = GetUserId();
                 model.Genras = await dbContext.Genra
                 .Select(c => new GenraViewModel
                 {

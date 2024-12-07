@@ -16,5 +16,6 @@ namespace MyMusicWebViewModels.Event
         public DateTime Date { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsActual { get; set; } = true;
+        public Organisation Organisation { get; set; }
     }
 }

@@ -29,5 +29,6 @@ namespace MyMusicWebViewModels.Event
         public string LocationAdress { get; set; }
 
         public bool IsActual { get; set; }
+        public Organisation? Organisation { get; set; }
     }
 }

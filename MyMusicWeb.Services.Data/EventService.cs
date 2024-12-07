@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
@@ -19,7 +20,7 @@ namespace MyMusicWeb.Services.Data
         {
             this.eventRepository = eventRepository;
         }
-        public async Task AddMusicInstrumentsAsync(EventAddViewModel model)
+        public async Task AddEventsAsync(EventAddViewModel model)
         {
             var newEvent = new Event
             {
@@ -29,7 +30,8 @@ namespace MyMusicWeb.Services.Data
                 LocationId = model.LocationId,
                 GenraId = model.GenraId,
                 IsActual = true,
-                Date = model.Date
+                Date = model.Date,
+                OrganisationId = Guid.Parse(model.OrganisationId)
             };
             await eventRepository.AddAsync(newEvent);
         }
@@ -53,19 +55,26 @@ namespace MyMusicWeb.Services.Data
             {
                 throw new ArgumentException();
             }
+            
+            if(model.OrganisationId == entity.OrganisationId.ToString())
+            {
+                entity.Name = model.Name;
+                entity.Date = model.Date;
+                entity.Description = model.Description;
+                entity.ImageUrl = model.ImageUrl;
+                entity.LocationId = model.LocationId;
+                entity.GenraId = model.GenraId;
 
-            entity.Name = model.Name;
-            entity.Date = model.Date;
-            entity.Description = model.Description;
-            entity.ImageUrl = model.ImageUrl;
-            entity.LocationId = model.LocationId;
-            entity.GenraId = model.GenraId;
+
+                await eventRepository.UpdateAsync(entity);
+            }
+            
 
 
-            await eventRepository.UpdateAsync(entity);
+            
         }
 
-        public async Task<EventDetailsViewModel> EventsDetailsById(Guid id)
+        public async Task<EventDetailsViewModel> EventsDetailsById(Guid id, Organisation currentUser)
         {
             var model = await eventRepository
                 .GetAllAtached()
@@ -81,13 +90,14 @@ namespace MyMusicWeb.Services.Data
                     LocationName = p.Location.Name,
                     LocationAdress = p.Location.Adress,
                     GenraName = p.Genra.Name,
-                    IsActual = p.IsActual
+                    IsActual = p.IsActual,
+                    Organisation = currentUser
                 })
                 .FirstOrDefaultAsync();
             return model;
         }
 
-        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string id)
+        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(Organisation entity)
         {
             var model = await eventRepository
                 .GetAllAtached()
@@ -98,7 +108,8 @@ namespace MyMusicWeb.Services.Data
                    Name = p.Name,
                    Date = p.Date,
                    ImageUrl = p.ImageUrl,
-                   IsActual = p.IsActual
+                   IsActual = p.IsActual,
+                   Organisation = entity
                })
                .AsNoTracking()
                .ToListAsync();
