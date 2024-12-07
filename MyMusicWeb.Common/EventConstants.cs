@@ -21,6 +21,9 @@ namespace MyMusicWeb.Common
         public const int LocationAdressMinLength = 5;
         public const int LocationNameMaxLength = 100;
         public const int LocationNameMinLength = 2;
+        //Organisation
+        public const int OrgnisationNameMaxLength = 255;
+        public const int OrganisationNameMinLength = 2;
 
     }
 }

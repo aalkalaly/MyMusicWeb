@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyMusicWebDataModels
 {
@@ -33,9 +34,11 @@ namespace MyMusicWebDataModels
         [Comment("The event's genra")]
 
         public Guid GenraId { get; set; }
+        [ForeignKey(nameof(GenraId))]
         public Genra Genra { get; set; }
         [Comment("The event's location")]
         public Guid LocationId { get; set; }
+        [ForeignKey(nameof(LocationId))]
         public Location Location { get; set; }
         [Required]
         [Comment("Is the event still ongoing")]
@@ -43,6 +46,10 @@ namespace MyMusicWebDataModels
         [Required]
 
         public int AvailableTickets { get; set; } = 0;
+        [Required]
+        public Guid OrganisationId { get; set; }
+        [ForeignKey(nameof(OrganisationId))]
+        public Organisation Organisation { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }
