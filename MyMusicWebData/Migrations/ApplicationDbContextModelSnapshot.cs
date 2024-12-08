@@ -274,7 +274,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApplicationUsers");
+                    b.ToTable("ApplicationUsers", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Category", b =>
@@ -292,7 +292,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -360,7 +360,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("OrganisationId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Genra", b =>
@@ -378,7 +378,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genra");
+                    b.ToTable("Genra", (string)null);
 
                     b.HasData(
                         new
@@ -424,7 +424,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Location");
+                    b.ToTable("Location", (string)null);
 
                     b.HasData(
                         new
@@ -492,7 +492,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("MusicInstruments");
+                    b.ToTable("MusicInstruments", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.MusicInstrumentsBuyers", b =>
@@ -507,7 +507,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("MusicInstrumentsBuyers");
+                    b.ToTable("MusicInstrumentsBuyers", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Organisation", b =>
@@ -566,7 +566,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organisations");
+                    b.ToTable("Organisations", (string)null);
                 });
 
             modelBuilder.Entity("MyMusicWebDataModels.Ticket", b =>
@@ -594,7 +594,7 @@ namespace MyMusicWebData.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

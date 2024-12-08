@@ -23,7 +23,6 @@ namespace MyMusicWebData
         public DbSet<Genra > Genra { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

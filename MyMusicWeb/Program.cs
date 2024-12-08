@@ -5,7 +5,7 @@ using MyMusicWeb.Services.Data;
 using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWeb.Services.Mapping;
 using MyMusicWebData;
-
+using MyMusicWebData.Configurations;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 
@@ -28,8 +28,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-    //.AddSignInManager<SignInManager<ApplicationUser>>()
-    //.AddUserManager<UserManager<ApplicationUser>>();
+//.AddSignInManager<SignInManager<ApplicationUser>>()
+//.AddUserManager<UserManager<ApplicationUser>>();
 builder.Services.ConfigureApplicationCookie(cfg =>
 {
     cfg.LoginPath = "/Identity/Account/Login";
@@ -73,13 +73,13 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-using(var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var roles = new[] { "Admin", "User", "Organisation" };
     foreach (var role in roles)
     {
-        if(!await roleManager.RoleExistsAsync(role))
+        if (!await roleManager.RoleExistsAsync(role))
         {
             await roleManager.CreateAsync(new IdentityRole(role));
         }
