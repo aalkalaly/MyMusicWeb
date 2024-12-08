@@ -27,9 +27,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
 
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-//.AddSignInManager<SignInManager<ApplicationUser>>()
-//.AddUserManager<UserManager<ApplicationUser>>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddSignInManager<SignInManager<IdentityUser>>()
+    .AddUserManager<UserManager<IdentityUser>>();
 builder.Services.ConfigureApplicationCookie(cfg =>
 {
     cfg.LoginPath = "/Identity/Account/Login";

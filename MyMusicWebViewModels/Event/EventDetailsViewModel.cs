@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace MyMusicWebViewModels.Event
 {
@@ -29,6 +30,6 @@ namespace MyMusicWebViewModels.Event
         public string LocationAdress { get; set; }
 
         public bool IsActual { get; set; }
-        public Organisation? Organisation { get; set; }
+        public string? HealderName { get; set; }
     }
 }

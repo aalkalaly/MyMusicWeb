@@ -23,8 +23,8 @@ namespace MyMusicWebDataModels
         [ForeignKey(nameof(EventId))]
         public virtual Event Event { get; set; }
         [Comment("the person who bought the ticket")]
-        public Guid BuyerId { get; set; }
+        public string BuyerId { get; set; }
         [ForeignKey(nameof(BuyerId))]
-        public ApplicationUser User { get; set; }
+        public IdentityUser Buyer { get; set; }
     }
 }

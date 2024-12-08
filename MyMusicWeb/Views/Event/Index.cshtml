@@ -30,7 +30,7 @@
                     <h5 class="card-title">@product.Name</h5>
                     <p class="mb-0"><span class="fw-bold">Date: </span>@product.Date</p>
                     <div class="d-flex justify-content-between mt-auto">
-                        @if (User?.Identity?.IsAuthenticated == true && product.IsActual && User.Identity.Equals(product.Organisation))
+                        @if (User?.Identity?.IsAuthenticated == true && product.IsActual && User?.Identity?.Name != product.Healder.UserName)
                         {
                             <a asp-controller="Event" asp-action="Details" asp-route-id="@product.Id" class="btn btn-info me-2 w-50">Details</a>
                             <form asp-controller="Cart" asp-action="AddToCart" method="post" class="w-50">

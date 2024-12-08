@@ -27,11 +27,11 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Organisation currentUser = dbContext.Organisations.FirstOrDefault(o => o.Id.ToString() == GetUserId());
-            if (currentUser != null)
+            string currentUserId = GetUserId();
+            if (currentUserId != null)
             {
                 IEnumerable<EventIndexViewModel> model =
-                await this.eventService.IndexGetAllActualEventsAsync(currentUser);
+                await this.eventService.IndexGetAllActualEventsAsync(currentUserId);
                 return View(model);
             }
 
@@ -57,7 +57,7 @@ namespace MyMusicWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.OrganisationId = GetUserId();
+                
                 model.Locations = await dbContext.Location
                 .AsNoTracking()
                 .ToListAsync();
@@ -67,7 +67,8 @@ namespace MyMusicWeb.Controllers
                 return View(model);
             }
 
-            
+            model.HealderId = GetUserId();
+
             await this.eventService.AddEventsAsync(model);
 
             return RedirectToAction("Index");
@@ -75,12 +76,11 @@ namespace MyMusicWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            Organisation organisation = dbContext.Organisations.FirstOrDefault(x => x.Id.ToString() == GetUserId());
-            if (organisation != null)
-            {
-                EventDetailsViewModel model = await eventService.EventsDetailsById(id, organisation);
+
+         
+                EventDetailsViewModel model = await eventService.EventsDetailsById(id);
                 return View(model);
-            }
+            
             return RedirectToAction("Idex");
             
         }
@@ -122,7 +122,7 @@ namespace MyMusicWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.OrganisationId = GetUserId();
+                model.HealderId = GetUserId();
                 model.Genras = await dbContext.Genra
                 .Select(c => new GenraViewModel
                 {

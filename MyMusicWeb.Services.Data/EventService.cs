@@ -31,7 +31,7 @@ namespace MyMusicWeb.Services.Data
                 GenraId = model.GenraId,
                 IsActual = true,
                 Date = model.Date,
-                OrganisationId = Guid.Parse(model.OrganisationId)
+                HealderId = model.HealderId
             };
             await eventRepository.AddAsync(newEvent);
         }
@@ -45,6 +45,7 @@ namespace MyMusicWeb.Services.Data
             if (events != null)
             {
                 events.IsActual = false;
+                await eventRepository.UpdateAsync(events);
                 //await eventRepository.DeleteAsync(events.Id);
             }
         }
@@ -56,7 +57,7 @@ namespace MyMusicWeb.Services.Data
                 throw new ArgumentException();
             }
             
-            if(model.OrganisationId == entity.OrganisationId.ToString())
+            if(model.HealderId == entity.HealderId)
             {
                 entity.Name = model.Name;
                 entity.Date = model.Date;
@@ -74,7 +75,7 @@ namespace MyMusicWeb.Services.Data
             
         }
 
-        public async Task<EventDetailsViewModel> EventsDetailsById(Guid id, Organisation currentUser)
+        public async Task<EventDetailsViewModel> EventsDetailsById(Guid id)
         {
             var model = await eventRepository
                 .GetAllAtached()
@@ -91,17 +92,17 @@ namespace MyMusicWeb.Services.Data
                     LocationAdress = p.Location.Adress,
                     GenraName = p.Genra.Name,
                     IsActual = p.IsActual,
-                    Organisation = currentUser
+                    HealderName = p.Healder.UserName
                 })
                 .FirstOrDefaultAsync();
             return model;
         }
 
-        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(Organisation entity)
+        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string userId)
         {
             var model = await eventRepository
                 .GetAllAtached()
-               .Where(p => p.IsActual != false)
+               .Where(p => p.IsActual == true)
                .Select(p => new EventIndexViewModel()
                {
                    Id = p.Id,
@@ -109,7 +110,7 @@ namespace MyMusicWeb.Services.Data
                    Date = p.Date,
                    ImageUrl = p.ImageUrl,
                    IsActual = p.IsActual,
-                   Organisation = entity
+                   Healder = p.Healder
                })
                .AsNoTracking()
                .ToListAsync();

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace MyMusicWebDataModels
 {
@@ -46,10 +47,12 @@ namespace MyMusicWebDataModels
         [Required]
 
         public int AvailableTickets { get; set; } = 0;
+
         [Required]
-        public Guid OrganisationId { get; set; }
-        [ForeignKey(nameof(OrganisationId))]
-        public Organisation Organisation { get; set; }
+        [Comment("The person who organizes the event")]
+        public string HealderId { get; set; }
+        [ForeignKey(nameof(HealderId))]
+        public IdentityUser Healder { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }

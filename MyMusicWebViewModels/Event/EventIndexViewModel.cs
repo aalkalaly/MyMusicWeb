@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyMusicWebDataModels;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,6 @@ namespace MyMusicWebViewModels.Event
         public DateTime Date { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsActual { get; set; } = true;
-        public Organisation Organisation { get; set; }
+        public  IdentityUser Healder { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace MyMusicWebViewModels.Event
         [Required]
         [StringLength(EventDescriptionMaxLength, MinimumLength = EventDescriptionMinLength)]
         public string Description { get; set; }
-        public string? OrganisationId { get; set; }
+        public string? HealderId { get; set; }
 
     }
 }

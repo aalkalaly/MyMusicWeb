@@ -10,9 +10,9 @@ namespace MyMusicWeb.Services.Data.Interfaces
 {
     public interface IEventService
     {
-        Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync( Organisation entity);
+        Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync( string userId);
         Task AddEventsAsync(EventAddViewModel model);
-        Task<EventDetailsViewModel> EventsDetailsById(Guid id, Organisation currentUser);
+        Task<EventDetailsViewModel> EventsDetailsById(Guid id);
         Task EditEventsById(EventEditViewModel model, Event entity);
         Task DeleteFromEventsById(EventDeleteViewModel model);
     }

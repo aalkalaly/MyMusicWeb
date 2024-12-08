@@ -13,6 +13,6 @@ namespace MyMusicWebDataModels
         {
             this.Id = Guid.NewGuid();
         }
-        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        
     }
 }
