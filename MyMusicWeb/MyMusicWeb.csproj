@@ -28,4 +28,10 @@
     <ProjectReference Include="..\MyMusicWebViewModels\MyMusicWebViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\UserManagment\" />
+  </ItemGroup>
+
 </Project>

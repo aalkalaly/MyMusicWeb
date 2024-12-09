@@ -26,5 +26,8 @@ namespace MyMusicWebDataModels
         public string BuyerId { get; set; }
         [ForeignKey(nameof(BuyerId))]
         public IdentityUser Buyer { get; set; }
+        [Required]
+        [Comment("the amount of tikets on buys")]
+        public int Count { get; set; }
     }
 }

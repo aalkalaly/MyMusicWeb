@@ -18,5 +18,6 @@ namespace MyMusicWebViewModels.Ticket
         [Required]
         [Range(MinCountOfTickets, MaxCountOfTickets)]
         public int Count { get; set; }
+        public string? BuyerId { get; set; }
     }
 }

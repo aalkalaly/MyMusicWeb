@@ -43,6 +43,7 @@ namespace MyMusicWeb.Services.Data
             if (instrument != null)
             {
                 instrument.IsDeleted = true;
+                await musicInstrumentRepository.UpdateAsync(instrument);
                 //await musicInstrumentRepository.DeleteAsync(instrument.Id);
             }
         }

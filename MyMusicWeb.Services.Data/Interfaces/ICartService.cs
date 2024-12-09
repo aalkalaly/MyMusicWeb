@@ -1,5 +1,6 @@
 ﻿using MyMusicWebViewModels;
 using MyMusicWebViewModels.Event;
+using MyMusicWebViewModels.Ticket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace MyMusicWeb.Services.Data.Interfaces
         Task AddInstrumentsToCartById(Guid id, string currentUserId);
         Task<IEnumerable<EventIndexViewModel>> CartGetAllNotDeletedEventsAsync(string id);
         Task RemoveEventsFromCartById(Guid id, string currentUserId);
-        Task AddEventsToCartById(Guid id, string currentUserId);
+        Task BuyTickets(BuyTicketViewModel model);
     }
 }

@@ -6,6 +6,7 @@ using MyMusicWeb.Services.Data.Interfaces;
 using MyMusicWeb.Services.Mapping;
 using MyMusicWebData;
 using MyMusicWebData.Configurations;
+using MyMusicWebData.Seeder;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
 
@@ -69,14 +70,20 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 {
+    var service = scope.ServiceProvider;
+    AssignAdminRole.AdminRoleSeeder(service);
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var roles = new[] { "Admin", "User", "Organisation" };
+    var roles = new[] { "Admin", "User"};
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
