@@ -34,6 +34,10 @@ namespace MyMusicWebViewModels.Event
         [Required]
         [StringLength(EventDescriptionMaxLength, MinimumLength = EventDescriptionMinLength)]
         public string Description { get; set; }
+        [Required]
+        [Range(10, 60000, ErrorMessage = "Please enter a number between 10 and 60000")]
+
+        public int Count { get; set; }
         public string? HealderId { get; set; }
 
     }

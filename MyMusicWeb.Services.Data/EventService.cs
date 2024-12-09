@@ -31,7 +31,8 @@ namespace MyMusicWeb.Services.Data
                 GenraId = model.GenraId,
                 IsActual = true,
                 Date = model.Date,
-                HealderId = model.HealderId
+                HealderId = model.HealderId,
+                AvailableTickets = model.Count
             };
             await eventRepository.AddAsync(newEvent);
         }
@@ -65,6 +66,7 @@ namespace MyMusicWeb.Services.Data
                 entity.ImageUrl = model.ImageUrl;
                 entity.LocationId = model.LocationId;
                 entity.GenraId = model.GenraId;
+                entity.AvailableTickets = model.Count;
 
 
                 await eventRepository.UpdateAsync(entity);
@@ -92,7 +94,8 @@ namespace MyMusicWeb.Services.Data
                     LocationAdress = p.Location.Adress,
                     GenraName = p.Genra.Name,
                     IsActual = p.IsActual,
-                    HealderName = p.Healder.UserName
+                    HealderName = p.Healder.UserName,
+                    Count = p.AvailableTickets
                 })
                 .FirstOrDefaultAsync();
             return model;

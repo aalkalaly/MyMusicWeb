@@ -30,6 +30,10 @@ namespace MyMusicWebViewModels.Event
         [Required(ErrorMessage = "No Date Provided")]
         [RegexStringValidator(@"^\d{2}-\d{2}-\d{4}$")]
         public DateTime Date { get; set; }
+
+        [Required]
+        [Range(10, 60000, ErrorMessage = "Please enter a number between 10 and 60000")]
+        public int Count { get; set; }
     
         public string? HealderId { get; set; }
 

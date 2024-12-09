@@ -122,7 +122,7 @@ namespace MyMusicWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.HealderId = GetUserId();
+               
                 model.Genras = await dbContext.Genra
                 .Select(c => new GenraViewModel
                 {
@@ -140,6 +140,7 @@ namespace MyMusicWeb.Controllers
                .ToListAsync();
                 return View(model);
             }
+            model.HealderId = GetUserId();
             Event entity = await dbContext.Events.FindAsync(id);
 
             await this.eventService.EditEventsById(model, entity);
