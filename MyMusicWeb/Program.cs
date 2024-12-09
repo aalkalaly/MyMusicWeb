@@ -40,6 +40,8 @@ builder.Services.RegisterRepostitories(typeof(ApplicationUser).Assembly);
 builder.Services.AddScoped<IMusicInstrumentsService, MusicInstrumentsService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<MyMusicWeb.Services.Data.Interfaces.IUserService,
+                          MyMusicWeb.Services.Data.UserService>();
 
 builder.Services.AddControllersWithViews();
 
