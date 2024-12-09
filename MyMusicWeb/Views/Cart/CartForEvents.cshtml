@@ -1,4 +1,5 @@
-﻿@*  @model IEnumerable<EventIndexViewModel>
+﻿@using MyMusicWebViewModels.Event
+ @model IEnumerable<EventAddToCart>
 @{
     ViewData["Title"] = "Cart For Events";
 }
@@ -27,11 +28,9 @@
         <div class="col-md-2 text-start">
             <h5 class="mb-0">@product.Price.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("fr-FR"))</h5>
         </div>
-        <div class="col-md-4 text-end">
-            <form asp-controller="Cart" asp-action="RemoveInstrumentFromCart" asp-route-id="@product.Id" method="post" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Remove from Cart</button>
-            </form>
+        <div class="col-md-2 text-start">
+            <h5 class="mb-0">X @product.Count</h5>
         </div>
 
     </div>
-}  *@
+} 

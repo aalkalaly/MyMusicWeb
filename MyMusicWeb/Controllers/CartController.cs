@@ -64,37 +64,14 @@ namespace MyMusicWeb.Controllers
                 return RedirectToPage("/Identity/Account/Login");
             }
 
-            IEnumerable<EventIndexViewModel> model =
+            IEnumerable<EventAddToCart> model =
                 await this.cartService.CartGetAllNotDeletedEventsAsync(currentUserId);
 
 
             return View(model);
         }
-        [HttpGet]
-        public async Task<IActionResult> BuyTickets(Guid id)
-        {
-            var model = new BuyTicketViewModel();
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<IActionResult> BuyTickets(BuyTicketViewModel model)
-        {
-
-            string currentUserId = GetUserId();
-            
-            await this.cartService.BuyTickets(model);
-
-            return RedirectToAction("Cart");
-        }
-        [HttpPost]
-        public async Task<IActionResult> RemoveEventsFromCart(Guid id)
-        {
-
-            string currentUserId = GetUserId();
-            await this.cartService.RemoveEventsFromCartById(id, currentUserId);
-
-            return RedirectToAction("Cart");
-        }
+        
+        
 
         private string? GetUserId()
         {

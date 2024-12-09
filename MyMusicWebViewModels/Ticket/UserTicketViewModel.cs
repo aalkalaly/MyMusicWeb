@@ -9,9 +9,7 @@ namespace MyMusicWebViewModels.Ticket
 {
     public class UserTicketViewModel
     {
-        public string Id { get; set; }
-        public string EventName { get; set; }
-        public string Location { get; set; }
+       public int Count { get; set; }
         public string Price { get; set; }
 
     }

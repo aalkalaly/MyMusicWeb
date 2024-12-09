@@ -14,8 +14,6 @@ namespace MyMusicWeb.Services.Data.Interfaces
         Task<IEnumerable<MusicalInstrumentsIndexViewModel>> CartGetAllNotDeletedInstrumentsAsync(string id);
         Task RemoveInstrumentsFromCartById(Guid id, string currentUserId);
         Task AddInstrumentsToCartById(Guid id, string currentUserId);
-        Task<IEnumerable<EventIndexViewModel>> CartGetAllNotDeletedEventsAsync(string id);
-        Task RemoveEventsFromCartById(Guid id, string currentUserId);
-        Task BuyTickets(BuyTicketViewModel model);
+        Task<IEnumerable<EventAddToCart>> CartGetAllNotDeletedEventsAsync(string id);
     }
 }

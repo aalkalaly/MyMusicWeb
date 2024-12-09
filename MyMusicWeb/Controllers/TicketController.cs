@@ -38,7 +38,7 @@ namespace MyMusicWeb.Controllers
             
             if (model.BuyerId == null)
             {
-                return Unauthorized("user isn't authenticated.");
+                return RedirectToPage("/Identity/Account/Login");
             }
             model.BuyerId = GetUserId();
             var result = await ticketService.BuyTicketAsync(  model);
