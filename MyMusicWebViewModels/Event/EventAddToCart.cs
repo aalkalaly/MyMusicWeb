@@ -15,5 +15,7 @@ namespace MyMusicWebViewModels.Event
         public string? ImageUrl { get; set; }
         public List<BuyTicketViewModel> Tickets { get; set; }
         public int Count { get; set; }
+
+
     }
 }

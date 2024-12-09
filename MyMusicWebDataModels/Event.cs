@@ -53,6 +53,8 @@ namespace MyMusicWebDataModels
         public string HealderId { get; set; }
         [ForeignKey(nameof(HealderId))]
         public IdentityUser Healder { get; set; }
+        [Required]
+        public decimal PricePerTicket { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }

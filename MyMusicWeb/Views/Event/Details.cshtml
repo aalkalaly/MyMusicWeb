@@ -32,6 +32,7 @@
             <p class="card-text"><small class="text-muted">Adress: @Model.LocationAdress</small></p>
             <p class="card-text"><small class="text-muted">Genra: @Model.GenraName</small></p>
             <p class="card-text"><small class="text-muted">Tickets left: @Model.Count</small></p>
+            <p class="card-text"><small class="text-muted">Price for a ticket: @Model.PricePerTicket</small></p>
             <hr />
         </div>
         <div class="card-footer text-center">
@@ -39,10 +40,8 @@
                 <a asp-controller="Event" asp-action="Index" class="btn btn-warning d-flex justify-content-center align-items-center flex-fill mx-1">Back</a>
                 @if (User?.Identity?.IsAuthenticated == true && Model.IsActual)
                 {
-                    <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex justify-content-center align-items-center flex-fill mx-1">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        <button type="submit" class="btn btn-success w-100">Buy</button>
-                    </form>
+                    <a asp-controller="Ticket" asp-action="BuyTickets" asp-route-id="@Model.Id" class="btn btn-success d-flex justify-content-center align-items-center flex-fill mx-1">Buy T</a>
+                    
                 }
                 @if (User?.Identity?.Name == Model.HealderName)
                 {

@@ -32,7 +32,8 @@ namespace MyMusicWeb.Services.Data
                 IsActual = true,
                 Date = model.Date,
                 HealderId = model.HealderId,
-                AvailableTickets = model.Count
+                AvailableTickets = model.Count,
+                PricePerTicket = model.PricePerTicket
             };
             await eventRepository.AddAsync(newEvent);
         }
@@ -67,6 +68,7 @@ namespace MyMusicWeb.Services.Data
                 entity.LocationId = model.LocationId;
                 entity.GenraId = model.GenraId;
                 entity.AvailableTickets = model.Count;
+                entity.PricePerTicket = model.PricePerTicket;
 
 
                 await eventRepository.UpdateAsync(entity);
@@ -95,7 +97,8 @@ namespace MyMusicWeb.Services.Data
                     GenraName = p.Genra.Name,
                     IsActual = p.IsActual,
                     HealderName = p.Healder.UserName,
-                    Count = p.AvailableTickets
+                    Count = p.AvailableTickets,
+                    PricePerTicket = p.PricePerTicket
                 })
                 .FirstOrDefaultAsync();
             return model;

@@ -35,6 +35,7 @@
         <div class="card-footer text-center">
             <div class="d-flex justify-content-between align-items-center">
                 <a asp-controller="MusicInstruments" asp-action="Index" class="btn btn-warning d-flex justify-content-center align-items-center flex-fill mx-1">Back</a>
+
                 @if (User?.Identity?.IsAuthenticated == true && User?.Identity?.Name != Model.Seller && !Model.HasBought)
                 {
                     <form asp-controller="Cart" asp-action="AddInstrumentToCart" method="post" class="d-flex justify-content-center align-items-center flex-fill mx-1">

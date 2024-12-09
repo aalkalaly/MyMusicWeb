@@ -33,10 +33,7 @@
                         @if (User?.Identity?.IsAuthenticated == true && product.IsActual && User?.Identity?.Name != product.Healder.UserName)
                         {
                             <a asp-controller="Event" asp-action="Details" asp-route-id="@product.Id" class="btn btn-info me-2 w-50">Details</a>
-                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="w-50">
-                                <input type="hidden" name="id" value="@product.Id" />
-                                <button type="submit" class="btn btn-success w-100">Buy</button>
-                            </form>
+                            
                         }
                         else
                         {

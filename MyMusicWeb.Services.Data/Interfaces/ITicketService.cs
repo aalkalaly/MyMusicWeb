@@ -9,10 +9,8 @@ namespace MyMusicWeb.Services.Data.Interfaces
 {
     public interface ITicketService
     {
-        Task<bool> BuyTicketAsync(Guid eventId, Guid userId);
-        Task<bool>SetAvailableTicketsAsync(Guid eventId, int availableTickets);
-        Task<bool> DecreaseAvailableTicketsAsync(Guid eventId, int numberOfTickets);
-        Task<IEnumerable<UserTicketViewModel>> GetUserTicketsAsync(Guid userId);
+        Task<bool> BuyTicketAsync( BuyTicketViewModel model);
+
 
     }
 }

@@ -32,6 +32,7 @@ namespace MyMusicWebViewModels.Event
         public int Count { get; set; }
 
         public bool IsActual { get; set; }
+        public decimal PricePerTicket { get; set; }
         public string? HealderName { get; set; }
     }
 }

@@ -14,35 +14,39 @@ namespace MyMusicWeb.Services.Data
     {
         
             private readonly IRepository<Ticket, Guid> ticketRepository;
-            private readonly IRepository<Event, object> eventRepository;
+            private readonly IRepository<Event, Guid> eventRepository;
 
             public TicketService(
                 IRepository<Ticket, Guid> ticketRepository,
-                IRepository<Event, object> eventRepository)
+                IRepository<Event, Guid> eventRepository)
             {
                 this.ticketRepository = ticketRepository;
                 this.eventRepository = eventRepository;
             }
 
-            public Task<bool> BuyTicketAsync(Guid eventId, Guid userId)
+        public async Task<bool> BuyTicketAsync(  BuyTicketViewModel model)
+        {
+            Event? eventOrNull = await eventRepository.FirstOrDefaultAsync(p => p.Id == model.EventId);
+            if (eventOrNull == null  )
             {
-                throw new NotImplementedException();
+                return false;
             }
+            if (!eventOrNull.IsActual)
+            {
+                return false;
+            }
+            var newTicket = new Ticket
+            {
+                EventId = model.EventId,
+                BuyerId = model.BuyerId,
+                Count = model.Count,
+                Price = eventRepository.GetById(model.EventId).PricePerTicket * model.Count
+            };
+            await ticketRepository.AddAsync(newTicket);
+            return true;
+        }
 
-            public Task<bool> DecreaseAvailableTicketsAsync(Guid eventId, int numberOfTickets)
-            {
-                throw new NotImplementedException();
-            }
-
-            public Task<IEnumerable<UserTicketViewModel>> GetUserTicketsAsync(Guid userId)
-            {
-                throw new NotImplementedException();
-            }
-
-            public Task<bool> SetAvailableTicketsAsync(Guid eventId, int availableTickets)
-            {
-                throw new NotImplementedException();
-            }
+          
         
     }
 }

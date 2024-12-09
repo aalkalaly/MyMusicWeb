@@ -38,6 +38,9 @@ namespace MyMusicWebViewModels.Event
         [Range(10, 60000, ErrorMessage = "Please enter a number between 10 and 60000")]
 
         public int Count { get; set; }
+        [Required]
+        [Range(1, 3000, ErrorMessage = "Please enter a number between 1 and 3000")]
+        public decimal PricePerTicket { get; set; }
         public string? HealderId { get; set; }
 
     }
