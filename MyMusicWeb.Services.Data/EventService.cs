@@ -104,11 +104,19 @@ namespace MyMusicWeb.Services.Data
             return model;
         }
 
-        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string userId)
+        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string userId, string? searchQuery = null)
         {
-            var model = await eventRepository
-                .GetAllAtached()
-               .Where(p => p.IsActual == true)
+            var model =  eventRepository
+                .GetAllAtached();
+               
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                searchQuery = searchQuery.ToLower().Trim();
+                model = model.Where(m => m.Name.ToLower().Contains(searchQuery));
+            }
+            
+            return await model
+                .Where(p => p.IsActual == true)
                .Select(p => new EventIndexViewModel()
                {
                    Id = p.Id,
@@ -120,7 +128,7 @@ namespace MyMusicWeb.Services.Data
                })
                .AsNoTracking()
                .ToListAsync();
-            return model;
+            
         }
     }
 }

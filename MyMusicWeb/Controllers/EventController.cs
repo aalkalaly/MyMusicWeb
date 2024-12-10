@@ -25,13 +25,13 @@ namespace MyMusicWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchQuery = null)
         {
             string currentUserId = GetUserId();
             if (currentUserId != null)
             {
                 IEnumerable<EventIndexViewModel> model =
-                await this.eventService.IndexGetAllActualEventsAsync(currentUserId);
+                await this.eventService.IndexGetAllActualEventsAsync(currentUserId, searchQuery);
                 return View(model);
             }
 
