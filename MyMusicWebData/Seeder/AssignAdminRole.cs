@@ -23,7 +23,8 @@ namespace MyMusicWebData.Seeder
 			{
 				adminUser = new IdentityUser
 				{
-					UserName = adminEmail,
+					Id = "7682ff58-03bd-41b0-81fb-26b077c0050a",
+                    UserName = adminEmail,
 					Email = adminEmail
 				};
 				var createUserResult = userManager.CreateAsync(adminUser, adminPassword).GetAwaiter().GetResult();

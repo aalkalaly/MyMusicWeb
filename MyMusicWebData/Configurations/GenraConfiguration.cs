@@ -13,32 +13,11 @@ namespace MyMusicWebData.Configurations
     {
         void IEntityTypeConfiguration<Genra>.Configure(EntityTypeBuilder<Genra> builder)
         {
-            builder.HasData(SeedData());
+            builder.HasData();
         }
-        public List<Genra > SeedData()
-        {
-            List<Genra> genras = new List<Genra>()
-            {
-                new Genra()
-                {
-                    Name = "jazz"
-                },
-                new Genra()
-                {
-                    Name = "rock"
-                },
-                new Genra()
-                {
-                    Name = "metal"
-                },
-                new Genra()
-                {
-                    Name = "rap"
-                }
-            };
-            return genras;
+        
 
-        }
+        
     
     }
 }

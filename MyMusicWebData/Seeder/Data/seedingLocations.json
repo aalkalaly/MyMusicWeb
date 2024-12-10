@@ -1,0 +1,19 @@
+[
+    {
+        "Id": "0F3BF280-5C8F-4534-BF80-1BA60FD029E6",
+        "Name": "Joy Station",
+        "Adress": " Studentski grad, st. „Ac. Stephan Mladenov“ 3, 1700 Sofia"
+    },
+
+    {
+        "Id": "c28fe4c6-dad9-4cac-a1ae-c1f0e6c3883e",
+        "Name": "Vasil Levski Stadium",
+        "Adress": "Park, Borisova Gradina, bul. „Evlogi and Hristo Georgiev“ 38, 1164 Sofia"
+    },
+
+    {
+        "Id": "e75d991f-2538-497a-a161-5bc3f4aed4eb",
+        "Name": "NDK",
+        "Adress": "NDK, bul. Bulgaria, 1463 Sofia"
+    }
+]

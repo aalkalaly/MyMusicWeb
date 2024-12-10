@@ -13,30 +13,10 @@ namespace MyMusicWebData.Configurations
     {
         void IEntityTypeConfiguration<Location>.Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.HasData(SeedData());
+            builder.HasData();
         }
-        public List<Location> SeedData()
-        {
-            List<Location> locations = new List<Location>()
-            {
-                new Location()
-                {
-                    Name = "Joy Station",
-                    Adress = "ж.к. Студентски град, ул. „Акад. Стефан Младенов“ 3, 1700 София"
-                },
-                new Location()
-                {
-                    Name = "Vasil Levski Stadium",
-                    Adress = "Парк, Борисова Градина, бул. „Евлоги и Христо Георгиеви“ 38, 1164 София"
-                },
-                new Location()
-                {
-                    Name = "NDK",
-                    Adress = " Ндк, бул. България, 1463 София"
-                }
-            };
-            return locations;
-        }
+       
+        
     }
     
 }

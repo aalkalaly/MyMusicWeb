@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "b3b75cfd-6b4e-4d6b-82fa-3b321be40e5b",
+    "Name": "Rock"
+  },
+  {
+    "Id": "a0bce76c-14b9-4d78-87e7-f0a8f44c9a6e",
+    "Name": "Pop"
+  },
+  {
+    "Id": "f19e92b8-2c17-4c56-a612-78f15a6e71bc",
+    "Name": "Jazz"
+  },
+  {
+    "Id": "c82f1e9f-85e4-4b51-b19b-52431b40fd9c",
+    "Name": "Hip Hop"
+  },
+  {
+    "Id": "5e6f0b22-01cf-4b93-88fc-9d97e3c5682e",
+    "Name": "Classical"
+  },
+  {
+    "Id": "44755f58-80f1-4c5e-9c02-3a427bf4ab41",
+    "Name": "Electronic"
+  }
+]

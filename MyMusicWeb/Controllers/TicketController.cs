@@ -46,12 +46,9 @@ namespace MyMusicWeb.Controllers
             {
                 return BadRequest("Faild to purchase a ticket");
             }
-            return RedirectToAction("Details", "Event");
+            return RedirectToAction( "CartForEvent", "Cart");
         }
-        public IActionResult SetAvailableTickets()
-        {
-            throw new NotImplementedException();
-        }
+        
         private string? GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
