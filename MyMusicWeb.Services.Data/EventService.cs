@@ -23,7 +23,8 @@ namespace MyMusicWeb.Services.Data
             this.eventRepository = eventRepository;
         }
         public async Task AddEventsAsync(EventAddViewModel model)
-        {
+        {  
+            
             var newEvent = new Event
             {
                 Name = model.Name,
@@ -42,10 +43,10 @@ namespace MyMusicWeb.Services.Data
 
         public async Task DeleteFromEventsById(EventDeleteViewModel model)
         {
-            Event? events = await eventRepository.GetAllAtached()
+            Event? events =  eventRepository.GetAllAtached()
                      .Where(p => p.Id == model.Id)
                      .Where(p => p.IsActual == true)
-                     .FirstOrDefaultAsync();
+                     .FirstOrDefault();
             if (events != null)
             {
                 events.IsActual = false;
@@ -57,6 +58,10 @@ namespace MyMusicWeb.Services.Data
         public async Task EditEventsById(EventEditViewModel model, Event entity)
         {
             if (entity == null)
+            {
+                throw new ArgumentException();
+            }
+            if(entity.IsActual == false)
             {
                 throw new ArgumentException();
             }
@@ -83,6 +88,10 @@ namespace MyMusicWeb.Services.Data
 
         public async Task<EventDetailsViewModel> EventsDetailsById(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentException();
+            }
             var model = await eventRepository
                 .GetAllAtached()
                 .Where(p => p.Id == id)

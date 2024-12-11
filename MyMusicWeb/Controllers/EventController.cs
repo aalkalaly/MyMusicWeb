@@ -86,7 +86,7 @@ namespace MyMusicWeb.Controllers
                 EventDetailsViewModel model = await eventService.EventsDetailsById(id);
                 return View(model);
             
-            return RedirectToAction("Idex");
+          
             
         }
         [HttpGet]

@@ -70,7 +70,10 @@ namespace MyMusicWeb.Services.Data
 
         public async Task<IEnumerable<MusicalInstrumentsIndexViewModel>> IndexGetAllNotDeletedAsync(string currentUserId)
         {
-
+            if(currentUserId == null)
+            {
+                return null;
+            }
             var model = await musicInstrumentRepository
                 .GetAllAtached()
                 .Where(p => p.IsDeleted == false)
