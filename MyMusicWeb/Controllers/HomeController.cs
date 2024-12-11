@@ -12,21 +12,35 @@ namespace MyMusicWeb.Controllers
         {
             _logger = logger;
         }
+        // can be used to check the 500 error view
+        //public IActionResult ManualError()
+        //{
+        //    return StatusCode(500);
+        //}
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        
+        public IActionResult Error(int? statusCode = null)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            if (!statusCode.HasValue)
+            {
+                return this.View();
+            }
+
+            if (statusCode == 404)
+            {
+                return this.View("NotFound");
+            }
+
+                return this.View("Error500");
+
+
         }
     }
 }

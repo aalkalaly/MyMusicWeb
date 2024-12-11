@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Infrastructure;
@@ -60,9 +61,8 @@ var app = builder.Build();
 
 AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).Assembly, typeof(ImportEventDto).Assembly, typeof(ImportLocationDto).Assembly, typeof(ImportGenraDto).Assembly);
 
-
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
 }
@@ -72,6 +72,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
