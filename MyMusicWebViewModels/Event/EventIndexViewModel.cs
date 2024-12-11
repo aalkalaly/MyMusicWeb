@@ -18,5 +18,6 @@ namespace MyMusicWebViewModels.Event
         public string? ImageUrl { get; set; }
         public bool IsActual { get; set; } = true;
         public  IdentityUser Healder { get; set; }
+        public int TotalPages { get; set; }
     }
 }

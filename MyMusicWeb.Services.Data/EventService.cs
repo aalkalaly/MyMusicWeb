@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyMusicWeb.Services.Data.Interfaces;
+using MyMusicWeb.Services.Mapping;
 using MyMusicWebData.Repository.Interfaces;
 using MyMusicWebDataModels;
 using MyMusicWebViewModels;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MyMusicWeb.Services.Data
@@ -104,30 +106,53 @@ namespace MyMusicWeb.Services.Data
             return model;
         }
 
-        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(string userId, string? searchQuery = null)
+        public async Task<int> GetEventsCount(EventPaginationAndSearchViewModel inputModel)
         {
-            var model =  eventRepository
-                .GetAllAtached();
-               
-            if (!string.IsNullOrEmpty(searchQuery))
+            if (inputModel.SearchQuery != null)
             {
-                searchQuery = searchQuery.ToLower().Trim();
-                model = model.Where(m => m.Name.ToLower().Contains(searchQuery));
+                return await this.eventRepository.GetAllAtached()
+                .Where(e => e.IsActual == true)
+                .Where(m => m.Name.ToLower().Contains(inputModel.SearchQuery.ToLower()))
+                .CountAsync();
             }
+            return await this.eventRepository.GetAllAtached().CountAsync();
+        }
+
+        public async Task<IEnumerable<EventIndexViewModel>> IndexGetAllActualEventsAsync(EventPaginationAndSearchViewModel inputModel)
+        {
+            IQueryable<Event> allEventsQuery = this.eventRepository
+               .GetAllAtached()
+               .Where(e => e.IsActual == true);
+
+            if (!String.IsNullOrWhiteSpace(inputModel.SearchQuery))
+            {
+                allEventsQuery = allEventsQuery
+                    .Where(m => m.Name.ToLower().Contains(inputModel.SearchQuery.ToLower()));
+            }
+
+           
+
+            if (inputModel.CurrentPage.HasValue &&
+                inputModel.EntitiesPerPage.HasValue)
+            {
+                allEventsQuery = allEventsQuery
+                    .Skip(inputModel.EntitiesPerPage.Value * (inputModel.CurrentPage.Value - 1))
+                    .Take(inputModel.EntitiesPerPage.Value);
+            }
+
+            return await allEventsQuery
+                .Select(p => new EventIndexViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Date = p.Date,
+                    ImageUrl = p.ImageUrl,
+                    IsActual = p.IsActual,
+                    Healder = p.Healder
+                })
+                .ToArrayAsync();
+               
             
-            return await model
-                .Where(p => p.IsActual == true)
-               .Select(p => new EventIndexViewModel()
-               {
-                   Id = p.Id,
-                   Name = p.Name,
-                   Date = p.Date,
-                   ImageUrl = p.ImageUrl,
-                   IsActual = p.IsActual,
-                   Healder = p.Healder
-               })
-               .AsNoTracking()
-               .ToListAsync();
             
         }
     }

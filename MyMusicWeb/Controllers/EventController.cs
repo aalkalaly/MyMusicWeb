@@ -25,17 +25,22 @@ namespace MyMusicWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string? searchQuery = null)
+        public async Task<IActionResult> Index(EventPaginationAndSearchViewModel inputModel)
         {
-            string currentUserId = GetUserId();
-            if (currentUserId != null)
+            IEnumerable<EventIndexViewModel> allEvents =
+                await this.eventService.IndexGetAllActualEventsAsync(inputModel);
+            int allEventsCount = await this.eventService.GetEventsCount( inputModel);
+            EventPaginationAndSearchViewModel viewModel = new EventPaginationAndSearchViewModel
             {
-                IEnumerable<EventIndexViewModel> model =
-                await this.eventService.IndexGetAllActualEventsAsync(currentUserId, searchQuery);
-                return View(model);
-            }
+                Events = allEvents,
+                SearchQuery = inputModel.SearchQuery,
+                CurrentPage = inputModel.CurrentPage,
+                EntitiesPerPage = inputModel.EntitiesPerPage,
+                TotalPages = (int)Math.Ceiling((double)allEventsCount /
+                                               inputModel.EntitiesPerPage!.Value)
+            };
 
-            return RedirectToAction("Index", "HomeController");
+            return this.View(viewModel);
 
             
         }
