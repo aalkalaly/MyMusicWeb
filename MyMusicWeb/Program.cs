@@ -93,13 +93,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-using (var scope = app.Services.CreateScope())
-{
-    var service = scope.ServiceProvider;
-    AssignAdminRole.AdminRoleSeeder(service);
-    await DbSeeder.SeedEventAsync(service, jsonPathEvent, jsonPathGenra, jsonPathLocation);
-    
-}
+
 using(var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -111,6 +105,13 @@ using(var scope = app.Services.CreateScope())
             await roleManager.CreateAsync(new IdentityRole(role));
         }
     }
+}
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    AssignAdminRole.AdminRoleSeeder(service);
+    await DbSeeder.SeedEventAsync(service, jsonPathEvent, jsonPathGenra, jsonPathLocation);
+
 }
 
 app.Run();
